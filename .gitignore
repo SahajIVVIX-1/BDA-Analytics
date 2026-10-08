@@ -32,3 +32,7 @@ backend/models/*.joblib
 Thumbs.db
 .idea/
 .vscode/
+
+# Showcase site
+site/node_modules/
+site/dist/
