@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import {
-  Activity, BarChart3, Gauge, Globe2, Hash, Layers, LayoutDashboard, Menu, Moon, Search, Smile, Sun, Upload, X, Zap,
+  Activity, BarChart3, Database, Gauge, Globe2, Hash, Layers, LayoutDashboard, Menu, Moon, Search, Smile, Sun, Upload, X, Zap,
 } from 'lucide-react'
 import FilterBar from './FilterBar'
 import { Skeleton } from './ui'
@@ -19,10 +19,11 @@ export const NAV = [
   { to: '/explorer', label: 'Data explorer', icon: Search },
   { to: '/performance', label: 'Performance', icon: Gauge },
   { to: '/ingestion', label: 'Ingestion', icon: Upload },
+  { to: '/dataset', label: 'About dataset', icon: Database },
 ]
 
 // Pages where the global filter bar does not apply.
-const NO_FILTERS = ['/performance', '/ingestion', '/trends']
+const NO_FILTERS = ['/performance', '/ingestion', '/trends', '/dataset']
 
 function ThemeToggle() {
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme ||
