@@ -21,7 +21,7 @@ More screenshots (sentiment, trends, topics, anomalies, explorer, performance, d
 | NLP | Sentiment (TF-IDF + logistic regression, evaluated on TweetEval), topics (TF-IDF + NMF, English and Russian), per-post keywords | `backend/app/nlp/`, `scripts/train_*.py` |
 | Analytics | Sentiment, topics, trends (window-over-window growth and trend score), engagement, time patterns, geography, language, anomalies (rolling z-score, IQR, Isolation Forest) | `backend/app/analytics/` |
 | API | 26 FastAPI endpoints with validation, filtering, pagination and caching | `backend/app/api/`, [docs/api.md](docs/api.md) |
-| Dashboard | React 19 + Vite + Tailwind + Recharts: 10 pages, global filters in the URL, loading / error / empty states, dark mode, phone layout | `frontend/` |
+| Dashboard | React 19 + Vite + Tailwind + Recharts: 11 pages (including About dataset), global filters in the URL, loading / error / empty states, dark mode, phone layout | `frontend/` |
 | Experiments | Ingestion scaling, batch size, worker count, index timing, indexed vs collection scan with `explain()`, aggregation scaling, rollup vs live, NLP throughput | `experiments/`, [docs/performance.md](docs/performance.md) |
 | Tests | 37 backend tests (unit + MongoDB integration + API), frontend unit tests | `backend/tests/`, `frontend/src/test/` |
 
