@@ -10,7 +10,7 @@ export const headline = [
   { value: '12', label: 'purpose-built indexes on posts' },
   { value: '5', label: 'rollup collections from aggregation pipelines' },
   { value: '26', label: 'FastAPI endpoints' },
-  { value: '10', label: 'dashboard pages' },
+  { value: '11', label: 'dashboard pages' },
   { value: '35–44×', label: 'faster dashboard queries from rollups' },
 ]
 
@@ -153,4 +153,37 @@ export const codeLinks = [
   { title: 'Full project report', path: 'docs/report.md', desc: 'The 25-section course report' },
   { title: 'Methodology', path: 'docs/methodology.md', desc: 'Cleaning, NLP, trends, anomalies, synthetic engagement' },
   { title: 'Dataset notes', path: 'docs/dataset.md', desc: 'Source, licence, fields, gaps and representativeness' },
+]
+
+export const datasetSource = [
+  ['Source', 'https://github.com/fivethirtyeight/russian-troll-tweets'],
+  ['Collected by', 'Darren Linvill and Patrick Warren (Clemson University), published by FiveThirtyEight in 2018'],
+  ['Licence', 'Creative Commons Attribution 4.0 (CC BY 4.0)'],
+  ['What it is', 'Tweets from accounts that Twitter identified as connected to the Internet Research Agency (IRA)'],
+  ['Files', '13 CSV files, about 1 GB'],
+  ['Date range', '2012-02-02 to 2018-05-30 (UTC assumed)'],
+]
+
+export const postsPerYear = [
+  { year: '2012', posts: 488 },
+  { year: '2013', posts: 199 },
+  { year: '2014', posts: 7722 },
+  { year: '2015', posts: 821443 },
+  { year: '2016', posts: 1122936 },
+  { year: '2017', posts: 984720 },
+  { year: '2018', posts: 7306 },
+]
+
+export const datasetFields = [
+  ['tweet_id', 'post_id', 'Unique index; duplicates rejected'],
+  ['content', 'text, clean_text', 'Cleaned text drives NLP and search'],
+  ['publish_date', 'created_at', 'No time zone in the source; UTC assumed'],
+  ['language', 'language', 'Language names mapped to ISO 639-1 codes'],
+  ['region', 'location.country', 'Account-level country; no city'],
+  ['author', 'user.username', ''],
+  ['alt_external_id', 'user.user_id', 'external_author_id lost precision in the CSV'],
+  ['followers, following, updates', 'user.*', 'Follower count also stored as reach'],
+  ['account_category, account_type', 'user.*', 'Researcher-coded themes (RightTroll, LeftTroll, NewsFeed, ...)'],
+  ['post_type, retweet', 'post_type, is_retweet', ''],
+  ['(none)', 'hashtags, mentions, url_count, emojis', 'Extracted from the text during cleaning'],
 ]

@@ -4,14 +4,14 @@ import {
 } from 'recharts'
 import {
   REPO, aggregationOps, blob, codeLinks, collections, headline, indexVsScan, indexes, ingestionScaling,
-  ingestionStats, nlpThroughput, qualityFlags, rollupVsLive, screens, sentimentMix, sentimentModels,
+  datasetSource, datasetFields, ingestionStats, nlpThroughput, postsPerYear, qualityFlags, rollupVsLive, screens, sentimentMix, sentimentModels,
   sentimentPipelineScaling, tree, trendExample, workers,
 } from './data.js'
 
 const NAV = [
   ['overview', 'Overview'],
   ['architecture', 'Architecture'],
-  ['dataset', 'Dataset'],
+  ['dataset', 'About Dataset'],
   ['mongodb', 'MongoDB'],
   ['methods', 'Methods'],
   ['results', 'Results'],
@@ -205,7 +205,7 @@ function Dataset({ t }) {
   return (
     <Section
       id="dataset"
-      eyebrow="Dataset"
+      eyebrow="About Dataset"
       title="Real tweets, described honestly"
       intro="FiveThirtyEight's russian-troll-tweets dataset: tweets from accounts Twitter linked to the Internet Research Agency, collected by Linvill and Warren at Clemson University and published under CC BY 4.0."
     >
@@ -216,6 +216,26 @@ function Dataset({ t }) {
         <div><span className="fact-v">2012 – 2018</span><span className="fact-l">99.5% in 2015–2017</span></div>
         <div><span className="fact-v">56</span><span className="fact-l">language values</span></div>
         <div><span className="fact-v">80.6%</span><span className="fact-l">posts with a country</span></div>
+      </div>
+
+      <div className="grid-2">
+        <Card title="Source" source="docs/dataset.md">
+          <dl className="kv">
+            {datasetSource.map(([k, v]) => (<div key={k}><dt>{k}</dt><dd>{v.startsWith('https://') ? <a href={v}>{v.replace('https://github.com/', '')}</a> : v}</dd></div>))}
+          </dl>
+        </Card>
+        <Card title="Posts per year" source="docs/dataset.md">
+          <ResponsiveContainer width="100%" height={240}>
+            <BarChart data={postsPerYear} margin={{ top: 8, right: 8, left: 4 }}>
+              <CartesianGrid vertical={false} stroke={t.grid} />
+              <XAxis dataKey="year" stroke={t.axis} fontSize={12} />
+              <YAxis stroke={t.axis} fontSize={12} tickFormatter={(v) => `${v / 1000}K`} />
+              <Tooltip {...Tip({ t })} formatter={(v) => [fmt(v), 'posts']} />
+              <Bar dataKey="posts" fill={C.slate} radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+          <p className="note">Busiest day: 2016-10-06 with 18,634 posts. Collection gap from about 2017-10-23 to 2017-11-06. 44% of posts are retweets.</p>
+        </Card>
       </div>
 
       <div className="callouts">
@@ -266,6 +286,21 @@ total    = likes + comments + shares`}</pre>
           <p className="note">Flags are kept on the document as <code>quality_flags</code> rather than deleting posts.</p>
         </Card>
       </div>
+
+      <Card title="Fields and how they are stored" source="docs/dataset.md" className="wide">
+        <div className="table-scroll">
+          <table className="table">
+            <thead><tr><th>Source column</th><th>Stored as</th><th>Notes</th></tr></thead>
+            <tbody>
+              {datasetFields.map(([a, b, n]) => (<tr key={a}><td><code>{a}</code></td><td><code>{b}</code></td><td>{n || '—'}</td></tr>))}
+            </tbody>
+          </table>
+        </div>
+        <p className="note">
+          Sentiment was trained and evaluated on a separate dataset, TweetEval (train 45,615 / validation 2,000 / test 12,284),
+          which is never stored in MongoDB. Raw data is downloaded by <code>scripts/download_data.py</code> and is not in the repository.
+        </p>
+      </Card>
     </Section>
   )
 }
@@ -546,8 +581,8 @@ function Dashboard() {
     <Section
       id="dashboard"
       eyebrow="React dashboard"
-      title="Ten pages over the same MongoDB data"
-      intro="Overview, Sentiment, Trends, Topics, Engagement, Geography & language, Anomalies, Data explorer, Performance and Ingestion. Global filters live in the URL; every chart shows which collection answered and how long it took."
+      title="Eleven pages over the same MongoDB data"
+      intro="Overview, Sentiment, Trends, Topics, Engagement, Geography & language, Anomalies, Data explorer, Performance, Ingestion and About dataset. Global filters live in the URL; every chart shows which collection answered and how long it took."
     >
       <div className="tabs" role="tablist" aria-label="Dashboard screenshots">
         {screens.map((x, i) => (
