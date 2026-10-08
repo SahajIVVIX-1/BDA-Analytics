@@ -1,0 +1,53 @@
+{
+  "experiment": "ingestion_batch_size",
+  "run_at": "2026-10-08T08:17:52.764348+00:00",
+  "duration_sec": 289.9,
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "mongodb": "8.0.23",
+    "wiredtiger_cache_gb": 4.0,
+    "label": "Claude cloud container (Linux VM, 4 vCPU, 15 GiB RAM)"
+  },
+  "params": {
+    "records": 300000,
+    "workers": 4,
+    "index_mode": "deferred (only unique post_id index during load)"
+  },
+  "results": [
+    {
+      "batch_size": 100,
+      "inserted": 300000,
+      "elapsed_sec": 37.932,
+      "records_per_sec": 7908.8
+    },
+    {
+      "batch_size": 500,
+      "inserted": 300000,
+      "elapsed_sec": 26.825,
+      "records_per_sec": 11183.5
+    },
+    {
+      "batch_size": 1000,
+      "inserted": 300000,
+      "elapsed_sec": 26.503,
+      "records_per_sec": 11319.5
+    },
+    {
+      "batch_size": 5000,
+      "inserted": 300000,
+      "elapsed_sec": 25.744,
+      "records_per_sec": 11653.1
+    },
+    {
+      "batch_size": 20000,
+      "inserted": 300000,
+      "elapsed_sec": 25.435,
+      "records_per_sec": 11794.6
+    }
+  ]
+}

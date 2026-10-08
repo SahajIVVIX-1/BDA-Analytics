@@ -1,0 +1,80 @@
+{
+  "experiment": "ingestion_scaling",
+  "run_at": "2026-10-08T08:13:02.855055+00:00",
+  "duration_sec": 906.3,
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "mongodb": "8.0.23",
+    "wiredtiger_cache_gb": 4.0,
+    "label": "Claude cloud container (Linux VM, 4 vCPU, 15 GiB RAM)"
+  },
+  "params": {
+    "batch_size": 5000,
+    "workers": 4,
+    "index_mode": "deferred",
+    "data": "/home/claude/smbd/data/raw/ira538"
+  },
+  "results": [
+    {
+      "size_requested": 100000,
+      "total_read": 100000,
+      "inserted": 100000,
+      "duplicates": 0,
+      "invalid": 0,
+      "elapsed_sec": 9.098,
+      "records_per_sec": 10991.5,
+      "index_build_sec": 9.49,
+      "total_sec_including_indexes": 18.59,
+      "data_mb": 80.4,
+      "storage_mb": 10.7,
+      "index_mb": 31.6
+    },
+    {
+      "size_requested": 500000,
+      "total_read": 500000,
+      "inserted": 500000,
+      "duplicates": 0,
+      "invalid": 0,
+      "elapsed_sec": 42.319,
+      "records_per_sec": 11815.0,
+      "index_build_sec": 46.85,
+      "total_sec_including_indexes": 89.17,
+      "data_mb": 394.4,
+      "storage_mb": 105.8,
+      "index_mb": 147.8
+    },
+    {
+      "size_requested": 1000000,
+      "total_read": 1000000,
+      "inserted": 1000000,
+      "duplicates": 0,
+      "invalid": 0,
+      "elapsed_sec": 90.976,
+      "records_per_sec": 10991.9,
+      "index_build_sec": 99.07,
+      "total_sec_including_indexes": 190.05,
+      "data_mb": 789.9,
+      "storage_mb": 208.7,
+      "index_mb": 289.4
+    },
+    {
+      "size_requested": "all",
+      "total_read": 2946207,
+      "inserted": 2944814,
+      "duplicates": 1392,
+      "invalid": 1,
+      "elapsed_sec": 297.101,
+      "records_per_sec": 9916.5,
+      "index_build_sec": 310.92,
+      "total_sec_including_indexes": 608.02,
+      "data_mb": 2348.1,
+      "storage_mb": 627.2,
+      "index_mb": 839.7
+    }
+  ]
+}

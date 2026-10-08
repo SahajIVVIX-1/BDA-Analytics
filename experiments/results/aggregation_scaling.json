@@ -1,0 +1,400 @@
+{
+  "experiment": "aggregation_scaling",
+  "run_at": "2026-10-08T08:55:41.846810+00:00",
+  "duration_sec": 1668.5,
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "mongodb": "8.0.23",
+    "wiredtiger_cache_gb": 4.0,
+    "label": "Claude cloud container (Linux VM, 4 vCPU, 15 GiB RAM)"
+  },
+  "params": {
+    "runs": 3,
+    "timing": "median wall-clock ms of the full aggregate() call from Python"
+  },
+  "results": {
+    "pipelines": [
+      {
+        "size": "100K",
+        "documents": 100000,
+        "pipeline": "sentiment_distribution",
+        "ms": 770.2,
+        "runs_ms": [
+          770.2,
+          661.7,
+          815.2
+        ]
+      },
+      {
+        "size": "100K",
+        "documents": 100000,
+        "pipeline": "daily_volume",
+        "ms": 748.1,
+        "runs_ms": [
+          698.8,
+          748.1,
+          783.9
+        ]
+      },
+      {
+        "size": "100K",
+        "documents": 100000,
+        "pipeline": "top20_hashtags_unwind",
+        "ms": 231.9,
+        "runs_ms": [
+          209.4,
+          231.9,
+          239.2
+        ]
+      },
+      {
+        "size": "100K",
+        "documents": 100000,
+        "pipeline": "topic_x_sentiment",
+        "ms": 889.2,
+        "runs_ms": [
+          714.0,
+          919.2,
+          889.2
+        ]
+      },
+      {
+        "size": "100K",
+        "documents": 100000,
+        "pipeline": "weekly_sentiment_en",
+        "ms": 755.4,
+        "runs_ms": [
+          819.2,
+          677.8,
+          755.4
+        ]
+      },
+      {
+        "size": "100K",
+        "documents": 100000,
+        "pipeline": "country_engagement_lookup_users",
+        "ms": 647.4,
+        "runs_ms": [
+          647.4,
+          637.7,
+          712.1
+        ]
+      },
+      {
+        "size": "500K",
+        "documents": 500000,
+        "pipeline": "sentiment_distribution",
+        "ms": 3191.3,
+        "runs_ms": [
+          3591.0,
+          3056.7,
+          3191.3
+        ]
+      },
+      {
+        "size": "500K",
+        "documents": 500000,
+        "pipeline": "daily_volume",
+        "ms": 3964.5,
+        "runs_ms": [
+          3357.8,
+          4168.5,
+          3964.5
+        ]
+      },
+      {
+        "size": "500K",
+        "documents": 500000,
+        "pipeline": "top20_hashtags_unwind",
+        "ms": 928.2,
+        "runs_ms": [
+          1038.1,
+          928.2,
+          922.4
+        ]
+      },
+      {
+        "size": "500K",
+        "documents": 500000,
+        "pipeline": "topic_x_sentiment",
+        "ms": 4025.9,
+        "runs_ms": [
+          4073.1,
+          4025.9,
+          3673.1
+        ]
+      },
+      {
+        "size": "500K",
+        "documents": 500000,
+        "pipeline": "weekly_sentiment_en",
+        "ms": 4366.3,
+        "runs_ms": [
+          4195.9,
+          4442.8,
+          4366.3
+        ]
+      },
+      {
+        "size": "500K",
+        "documents": 500000,
+        "pipeline": "country_engagement_lookup_users",
+        "ms": 3064.1,
+        "runs_ms": [
+          2987.7,
+          3296.8,
+          3064.1
+        ]
+      },
+      {
+        "size": "1.00M",
+        "documents": 1000000,
+        "pipeline": "sentiment_distribution",
+        "ms": 7218.7,
+        "runs_ms": [
+          7208.5,
+          7218.7,
+          8203.0
+        ]
+      },
+      {
+        "size": "1.00M",
+        "documents": 1000000,
+        "pipeline": "daily_volume",
+        "ms": 7445.3,
+        "runs_ms": [
+          7783.7,
+          7445.3,
+          7331.8
+        ]
+      },
+      {
+        "size": "1.00M",
+        "documents": 1000000,
+        "pipeline": "top20_hashtags_unwind",
+        "ms": 2073.3,
+        "runs_ms": [
+          2147.8,
+          2073.3,
+          1638.1
+        ]
+      },
+      {
+        "size": "1.00M",
+        "documents": 1000000,
+        "pipeline": "topic_x_sentiment",
+        "ms": 7317.1,
+        "runs_ms": [
+          7774.8,
+          7317.1,
+          7148.3
+        ]
+      },
+      {
+        "size": "1.00M",
+        "documents": 1000000,
+        "pipeline": "weekly_sentiment_en",
+        "ms": 9281.3,
+        "runs_ms": [
+          9355.9,
+          8865.1,
+          9281.3
+        ]
+      },
+      {
+        "size": "1.00M",
+        "documents": 1000000,
+        "pipeline": "country_engagement_lookup_users",
+        "ms": 7372.3,
+        "runs_ms": [
+          8172.8,
+          7164.7,
+          7372.3
+        ]
+      },
+      {
+        "size": "2.94M",
+        "documents": 2944814,
+        "pipeline": "sentiment_distribution",
+        "ms": 21261.3,
+        "runs_ms": [
+          23154.2,
+          21261.3,
+          21090.1
+        ]
+      },
+      {
+        "size": "2.94M",
+        "documents": 2944814,
+        "pipeline": "daily_volume",
+        "ms": 24821.1,
+        "runs_ms": [
+          24935.7,
+          24194.7,
+          24821.1
+        ]
+      },
+      {
+        "size": "2.94M",
+        "documents": 2944814,
+        "pipeline": "top20_hashtags_unwind",
+        "ms": 6246.4,
+        "runs_ms": [
+          6366.9,
+          6246.4,
+          5343.0
+        ]
+      },
+      {
+        "size": "2.94M",
+        "documents": 2944814,
+        "pipeline": "topic_x_sentiment",
+        "ms": 25592.8,
+        "runs_ms": [
+          24642.9,
+          26016.6,
+          25592.8
+        ]
+      },
+      {
+        "size": "2.94M",
+        "documents": 2944814,
+        "pipeline": "weekly_sentiment_en",
+        "ms": 27117.2,
+        "runs_ms": [
+          27117.2,
+          26966.2,
+          28382.5
+        ]
+      },
+      {
+        "size": "2.94M",
+        "documents": 2944814,
+        "pipeline": "country_engagement_lookup_users",
+        "ms": 21680.9,
+        "runs_ms": [
+          21369.6,
+          21680.9,
+          21885.3
+        ]
+      }
+    ],
+    "cube_vs_live": [
+      {
+        "query": "overview_kpis",
+        "live_ms": 33711.4,
+        "cube_ms": 962.5,
+        "speedup": 35.0,
+        "live_runs_ms": [
+          33711.4,
+          34631.7,
+          32954.4
+        ],
+        "cube_runs_ms": [
+          1138.1,
+          919.0,
+          962.5
+        ]
+      },
+      {
+        "query": "sentiment_page",
+        "live_ms": 31485.9,
+        "cube_ms": 869.4,
+        "speedup": 36.2,
+        "live_runs_ms": [
+          31485.9,
+          30681.2,
+          32128.3
+        ],
+        "cube_runs_ms": [
+          1014.0,
+          869.4,
+          830.1
+        ]
+      },
+      {
+        "query": "topics_page",
+        "live_ms": 36684.3,
+        "cube_ms": 826.1,
+        "speedup": 44.4,
+        "live_runs_ms": [
+          36684.3,
+          36165.9,
+          37200.4
+        ],
+        "cube_runs_ms": [
+          796.2,
+          826.1,
+          885.6
+        ]
+      },
+      {
+        "query": "geography_page",
+        "live_ms": 25607.7,
+        "cube_ms": 686.5,
+        "speedup": 37.3,
+        "live_runs_ms": [
+          25607.7,
+          25871.3,
+          21915.0
+        ],
+        "cube_runs_ms": [
+          686.5,
+          682.8,
+          775.5
+        ]
+      },
+      {
+        "query": "overview_2016_english",
+        "live_ms": 14362.0,
+        "cube_ms": 416.6,
+        "speedup": 34.5,
+        "live_runs_ms": [
+          14362.0,
+          14161.2,
+          14766.0
+        ],
+        "cube_runs_ms": [
+          406.7,
+          416.6,
+          446.7
+        ]
+      }
+    ],
+    "rollup_build": {
+      "total_sec": 470.0,
+      "daily_cube": {
+        "seconds": 40.54,
+        "documents": 130165
+      },
+      "hourly_cube": {
+        "seconds": 40.8,
+        "documents": 171126
+      },
+      "hashtag_daily": {
+        "seconds": 37.62,
+        "documents": 417837
+      },
+      "keyword_daily": {
+        "seconds": 332.63,
+        "documents": 4423111
+      },
+      "users": {
+        "seconds": 18.38,
+        "documents": 2843
+      }
+    },
+    "collection_sizes": {
+      "posts": 2944814,
+      "daily_cube": 130165,
+      "hashtag_daily": 417837,
+      "keyword_daily": 4423111,
+      "users": 2843
+    }
+  }
+}

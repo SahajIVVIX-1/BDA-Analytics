@@ -1,0 +1,66 @@
+{
+  "experiment": "nlp_throughput",
+  "run_at": "2026-10-08T08:59:22.998430+00:00",
+  "duration_sec": 114.4,
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "mongodb": "8.0.23",
+    "wiredtiger_cache_gb": 4.0,
+    "label": "Claude cloud container (Linux VM, 4 vCPU, 15 GiB RAM)"
+  },
+  "params": {
+    "sample": 20000,
+    "e2e_posts": 200000,
+    "runs": 3
+  },
+  "results": {
+    "models": [
+      {
+        "task": "sentiment_vader",
+        "texts": 20000,
+        "ms": 1125.7,
+        "texts_per_sec": 17766.7
+      },
+      {
+        "task": "sentiment_tfidf_logreg",
+        "texts": 20000,
+        "ms": 831.0,
+        "texts_per_sec": 24067.4
+      },
+      {
+        "task": "topics_nmf_en_plus_keywords",
+        "texts": 20000,
+        "ms": 778.9,
+        "texts_per_sec": 25677.2
+      }
+    ],
+    "end_to_end": [
+      {
+        "workers": 1,
+        "posts": 200000,
+        "elapsed_sec": 38.36,
+        "db_write_sec": 14.67,
+        "posts_per_sec": 5213.3
+      },
+      {
+        "workers": 2,
+        "posts": 200000,
+        "elapsed_sec": 19.32,
+        "db_write_sec": 16.01,
+        "posts_per_sec": 10354.5
+      },
+      {
+        "workers": 4,
+        "posts": 200000,
+        "elapsed_sec": 19.58,
+        "db_write_sec": 16.06,
+        "posts_per_sec": 10214.9
+      }
+    ]
+  }
+}

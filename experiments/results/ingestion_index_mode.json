@@ -1,0 +1,39 @@
+{
+  "experiment": "ingestion_index_mode",
+  "run_at": "2026-10-08T08:23:05.194516+00:00",
+  "duration_sec": 125.8,
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "mongodb": "8.0.23",
+    "wiredtiger_cache_gb": 4.0,
+    "label": "Claude cloud container (Linux VM, 4 vCPU, 15 GiB RAM)"
+  },
+  "params": {
+    "records": 300000,
+    "workers": 4,
+    "batch_size": 5000
+  },
+  "results": [
+    {
+      "index_mode": "upfront",
+      "inserted": 300000,
+      "elapsed_sec": 68.115,
+      "records_per_sec": 4404.3,
+      "index_build_sec": 0.0,
+      "total_sec_including_indexes": 68.115
+    },
+    {
+      "index_mode": "deferred",
+      "inserted": 300000,
+      "elapsed_sec": 27.929,
+      "records_per_sec": 10741.4,
+      "index_build_sec": 29.32,
+      "total_sec_including_indexes": 57.25
+    }
+  ]
+}

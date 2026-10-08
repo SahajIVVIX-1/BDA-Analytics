@@ -1,0 +1,624 @@
+{
+  "experiment": "index_vs_collscan",
+  "run_at": "2026-10-08T08:27:53.373000+00:00",
+  "duration_sec": 288.2,
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "mongodb": "8.0.23",
+    "wiredtiger_cache_gb": 4.0,
+    "label": "Claude cloud container (Linux VM, 4 vCPU, 15 GiB RAM)"
+  },
+  "params": {
+    "runs": 3,
+    "timing": "median executionTimeMillis from explain('executionStats')",
+    "collscan": "hint {$natural: 1}",
+    "cache_note": "collections fit in the WiredTiger cache; warm-cache timings"
+  },
+  "results": [
+    {
+      "size": "100K",
+      "documents": 100000,
+      "query": "sentiment_range",
+      "index": "sentiment_created",
+      "collscan_ms": 123,
+      "collscan_docs_examined": 100000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 2258,
+      "collscan_runs_ms": [
+        148,
+        123,
+        92
+      ],
+      "indexed_ms": 5,
+      "indexed_docs_examined": 2258,
+      "indexed_keys_examined": 2258,
+      "indexed_n_returned": 2258,
+      "indexed_runs_ms": [
+        6,
+        5,
+        5
+      ],
+      "speedup": 24.6
+    },
+    {
+      "size": "100K",
+      "documents": 100000,
+      "query": "hashtag_equality",
+      "index": "hashtags_created",
+      "collscan_ms": 99,
+      "collscan_docs_examined": 100000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 460,
+      "collscan_runs_ms": [
+        99,
+        99,
+        122
+      ],
+      "indexed_ms": 2,
+      "indexed_docs_examined": 460,
+      "indexed_keys_examined": 460,
+      "indexed_n_returned": 460,
+      "indexed_runs_ms": [
+        3,
+        2,
+        1
+      ],
+      "speedup": 49.5
+    },
+    {
+      "size": "100K",
+      "documents": 100000,
+      "query": "language_range",
+      "index": "language_created",
+      "collscan_ms": 144,
+      "collscan_docs_examined": 100000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 171,
+      "collscan_runs_ms": [
+        144,
+        211,
+        83
+      ],
+      "indexed_ms": 0,
+      "indexed_docs_examined": 171,
+      "indexed_keys_examined": 171,
+      "indexed_n_returned": 171,
+      "indexed_runs_ms": [
+        2,
+        0,
+        0
+      ],
+      "speedup": 144.0
+    },
+    {
+      "size": "100K",
+      "documents": 100000,
+      "query": "user_timeline_top50",
+      "index": "user_created",
+      "collscan_ms": 97,
+      "collscan_docs_examined": 100000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 0,
+      "collscan_runs_ms": [
+        76,
+        97,
+        130
+      ],
+      "indexed_ms": 0,
+      "indexed_docs_examined": 0,
+      "indexed_keys_examined": 0,
+      "indexed_n_returned": 0,
+      "indexed_runs_ms": [
+        2,
+        0,
+        0
+      ],
+      "speedup": 97.0
+    },
+    {
+      "size": "100K",
+      "documents": 100000,
+      "query": "country_equality",
+      "index": "country_created",
+      "collscan_ms": 127,
+      "collscan_docs_examined": 100000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 215,
+      "collscan_runs_ms": [
+        127,
+        91,
+        145
+      ],
+      "indexed_ms": 1,
+      "indexed_docs_examined": 215,
+      "indexed_keys_examined": 215,
+      "indexed_n_returned": 215,
+      "indexed_runs_ms": [
+        3,
+        1,
+        0
+      ],
+      "speedup": 127.0
+    },
+    {
+      "size": "100K",
+      "documents": 100000,
+      "query": "date_range_1day",
+      "index": "created_at",
+      "collscan_ms": 148,
+      "collscan_docs_examined": 100000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 313,
+      "collscan_runs_ms": [
+        148,
+        151,
+        116
+      ],
+      "indexed_ms": 0,
+      "indexed_docs_examined": 313,
+      "indexed_keys_examined": 313,
+      "indexed_n_returned": 313,
+      "indexed_runs_ms": [
+        2,
+        0,
+        0
+      ],
+      "speedup": 148.0
+    },
+    {
+      "size": "500K",
+      "documents": 500000,
+      "query": "sentiment_range",
+      "index": "sentiment_created",
+      "collscan_ms": 518,
+      "collscan_docs_examined": 500000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 7125,
+      "collscan_runs_ms": [
+        518,
+        523,
+        482
+      ],
+      "indexed_ms": 18,
+      "indexed_docs_examined": 7125,
+      "indexed_keys_examined": 7125,
+      "indexed_n_returned": 7125,
+      "indexed_runs_ms": [
+        22,
+        18,
+        17
+      ],
+      "speedup": 28.8
+    },
+    {
+      "size": "500K",
+      "documents": 500000,
+      "query": "hashtag_equality",
+      "index": "hashtags_created",
+      "collscan_ms": 423,
+      "collscan_docs_examined": 500000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 4756,
+      "collscan_runs_ms": [
+        423,
+        414,
+        425
+      ],
+      "indexed_ms": 20,
+      "indexed_docs_examined": 4756,
+      "indexed_keys_examined": 4756,
+      "indexed_n_returned": 4756,
+      "indexed_runs_ms": [
+        20,
+        15,
+        20
+      ],
+      "speedup": 21.1
+    },
+    {
+      "size": "500K",
+      "documents": 500000,
+      "query": "language_range",
+      "index": "language_created",
+      "collscan_ms": 471,
+      "collscan_docs_examined": 500000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 9238,
+      "collscan_runs_ms": [
+        425,
+        480,
+        471
+      ],
+      "indexed_ms": 29,
+      "indexed_docs_examined": 9238,
+      "indexed_keys_examined": 9238,
+      "indexed_n_returned": 9238,
+      "indexed_runs_ms": [
+        34,
+        29,
+        29
+      ],
+      "speedup": 16.2
+    },
+    {
+      "size": "500K",
+      "documents": 500000,
+      "query": "user_timeline_top50",
+      "index": "user_created",
+      "collscan_ms": 432,
+      "collscan_docs_examined": 500000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 0,
+      "collscan_runs_ms": [
+        603,
+        432,
+        402
+      ],
+      "indexed_ms": 0,
+      "indexed_docs_examined": 0,
+      "indexed_keys_examined": 0,
+      "indexed_n_returned": 0,
+      "indexed_runs_ms": [
+        4,
+        0,
+        0
+      ],
+      "speedup": 432.0
+    },
+    {
+      "size": "500K",
+      "documents": 500000,
+      "query": "country_equality",
+      "index": "country_created",
+      "collscan_ms": 476,
+      "collscan_docs_examined": 500000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 2841,
+      "collscan_runs_ms": [
+        489,
+        418,
+        476
+      ],
+      "indexed_ms": 6,
+      "indexed_docs_examined": 2841,
+      "indexed_keys_examined": 2841,
+      "indexed_n_returned": 2841,
+      "indexed_runs_ms": [
+        11,
+        5,
+        6
+      ],
+      "speedup": 79.3
+    },
+    {
+      "size": "500K",
+      "documents": 500000,
+      "query": "date_range_1day",
+      "index": "created_at",
+      "collscan_ms": 479,
+      "collscan_docs_examined": 500000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 1037,
+      "collscan_runs_ms": [
+        597,
+        479,
+        418
+      ],
+      "indexed_ms": 2,
+      "indexed_docs_examined": 1037,
+      "indexed_keys_examined": 1037,
+      "indexed_n_returned": 1037,
+      "indexed_runs_ms": [
+        6,
+        2,
+        2
+      ],
+      "speedup": 239.5
+    },
+    {
+      "size": "1.00M",
+      "documents": 1000000,
+      "query": "sentiment_range",
+      "index": "sentiment_created",
+      "collscan_ms": 1404,
+      "collscan_docs_examined": 1000000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 13150,
+      "collscan_runs_ms": [
+        1520,
+        1404,
+        1220
+      ],
+      "indexed_ms": 39,
+      "indexed_docs_examined": 13150,
+      "indexed_keys_examined": 13150,
+      "indexed_n_returned": 13150,
+      "indexed_runs_ms": [
+        40,
+        38,
+        39
+      ],
+      "speedup": 36.0
+    },
+    {
+      "size": "1.00M",
+      "documents": 1000000,
+      "query": "hashtag_equality",
+      "index": "hashtags_created",
+      "collscan_ms": 810,
+      "collscan_docs_examined": 1000000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 9216,
+      "collscan_runs_ms": [
+        815,
+        783,
+        810
+      ],
+      "indexed_ms": 36,
+      "indexed_docs_examined": 9216,
+      "indexed_keys_examined": 9216,
+      "indexed_n_returned": 9216,
+      "indexed_runs_ms": [
+        36,
+        44,
+        33
+      ],
+      "speedup": 22.5
+    },
+    {
+      "size": "1.00M",
+      "documents": 1000000,
+      "query": "language_range",
+      "index": "language_created",
+      "collscan_ms": 917,
+      "collscan_docs_examined": 1000000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 14889,
+      "collscan_runs_ms": [
+        946,
+        881,
+        917
+      ],
+      "indexed_ms": 43,
+      "indexed_docs_examined": 14889,
+      "indexed_keys_examined": 14889,
+      "indexed_n_returned": 14889,
+      "indexed_runs_ms": [
+        38,
+        43,
+        45
+      ],
+      "speedup": 21.3
+    },
+    {
+      "size": "1.00M",
+      "documents": 1000000,
+      "query": "user_timeline_top50",
+      "index": "user_created",
+      "collscan_ms": 771,
+      "collscan_docs_examined": 1000000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 0,
+      "collscan_runs_ms": [
+        968,
+        771,
+        765
+      ],
+      "indexed_ms": 0,
+      "indexed_docs_examined": 0,
+      "indexed_keys_examined": 0,
+      "indexed_n_returned": 0,
+      "indexed_runs_ms": [
+        1,
+        0,
+        0
+      ],
+      "speedup": 771.0
+    },
+    {
+      "size": "1.00M",
+      "documents": 1000000,
+      "query": "country_equality",
+      "index": "country_created",
+      "collscan_ms": 973,
+      "collscan_docs_examined": 1000000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 9090,
+      "collscan_runs_ms": [
+        738,
+        973,
+        1030
+      ],
+      "indexed_ms": 34,
+      "indexed_docs_examined": 9090,
+      "indexed_keys_examined": 9090,
+      "indexed_n_returned": 9090,
+      "indexed_runs_ms": [
+        34,
+        22,
+        36
+      ],
+      "speedup": 28.6
+    },
+    {
+      "size": "1.00M",
+      "documents": 1000000,
+      "query": "date_range_1day",
+      "index": "created_at",
+      "collscan_ms": 892,
+      "collscan_docs_examined": 1000000,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 2271,
+      "collscan_runs_ms": [
+        863,
+        892,
+        946
+      ],
+      "indexed_ms": 5,
+      "indexed_docs_examined": 2271,
+      "indexed_keys_examined": 2271,
+      "indexed_n_returned": 2271,
+      "indexed_runs_ms": [
+        12,
+        5,
+        5
+      ],
+      "speedup": 178.4
+    },
+    {
+      "size": "2.94M",
+      "documents": 2944814,
+      "query": "sentiment_range",
+      "index": "sentiment_created",
+      "collscan_ms": 4955,
+      "collscan_docs_examined": 2944814,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 33703,
+      "collscan_runs_ms": [
+        4991,
+        4955,
+        4100
+      ],
+      "indexed_ms": 201,
+      "indexed_docs_examined": 33703,
+      "indexed_keys_examined": 33703,
+      "indexed_n_returned": 33703,
+      "indexed_runs_ms": [
+        217,
+        196,
+        201
+      ],
+      "speedup": 24.7
+    },
+    {
+      "size": "2.94M",
+      "documents": 2944814,
+      "query": "hashtag_equality",
+      "index": "hashtags_created",
+      "collscan_ms": 3454,
+      "collscan_docs_examined": 2944814,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 16172,
+      "collscan_runs_ms": [
+        4051,
+        3454,
+        3060
+      ],
+      "indexed_ms": 64,
+      "indexed_docs_examined": 16172,
+      "indexed_keys_examined": 16172,
+      "indexed_n_returned": 16172,
+      "indexed_runs_ms": [
+        85,
+        62,
+        64
+      ],
+      "speedup": 54.0
+    },
+    {
+      "size": "2.94M",
+      "documents": 2944814,
+      "query": "language_range",
+      "index": "language_created",
+      "collscan_ms": 3412,
+      "collscan_docs_examined": 2944814,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 28734,
+      "collscan_runs_ms": [
+        3440,
+        3412,
+        3171
+      ],
+      "indexed_ms": 122,
+      "indexed_docs_examined": 28734,
+      "indexed_keys_examined": 28734,
+      "indexed_n_returned": 28734,
+      "indexed_runs_ms": [
+        126,
+        122,
+        115
+      ],
+      "speedup": 28.0
+    },
+    {
+      "size": "2.94M",
+      "documents": 2944814,
+      "query": "user_timeline_top50",
+      "index": "user_created",
+      "collscan_ms": 3256,
+      "collscan_docs_examined": 2944814,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 50,
+      "collscan_runs_ms": [
+        3256,
+        3200,
+        4876
+      ],
+      "indexed_ms": 0,
+      "indexed_docs_examined": 50,
+      "indexed_keys_examined": 50,
+      "indexed_n_returned": 50,
+      "indexed_runs_ms": [
+        1,
+        0,
+        0
+      ],
+      "speedup": 3256.0
+    },
+    {
+      "size": "2.94M",
+      "documents": 2944814,
+      "query": "country_equality",
+      "index": "country_created",
+      "collscan_ms": 3181,
+      "collscan_docs_examined": 2944814,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 27178,
+      "collscan_runs_ms": [
+        3568,
+        3036,
+        3181
+      ],
+      "indexed_ms": 72,
+      "indexed_docs_examined": 27178,
+      "indexed_keys_examined": 27178,
+      "indexed_n_returned": 27178,
+      "indexed_runs_ms": [
+        93,
+        72,
+        70
+      ],
+      "speedup": 44.2
+    },
+    {
+      "size": "2.94M",
+      "documents": 2944814,
+      "query": "date_range_1day",
+      "index": "created_at",
+      "collscan_ms": 3394,
+      "collscan_docs_examined": 2944814,
+      "collscan_keys_examined": 0,
+      "collscan_n_returned": 7365,
+      "collscan_runs_ms": [
+        3271,
+        3983,
+        3394
+      ],
+      "indexed_ms": 22,
+      "indexed_docs_examined": 7365,
+      "indexed_keys_examined": 7365,
+      "indexed_n_returned": 7365,
+      "indexed_runs_ms": [
+        33,
+        21,
+        22
+      ],
+      "speedup": 154.3
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# Optional: run MongoDB in Docker instead of installing it.
+#   docker compose up -d mongo
+# The backend and frontend run on the host (see README). The WiredTiger cache is capped
+# at 4 GB so MongoDB leaves room for Python and the browser on a 16 GB laptop.
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: smbd-mongo
+    command: ["mongod", "--wiredTigerCacheSizeGB", "4"]
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
