@@ -1,0 +1,529 @@
+{
+  "run_at": "2026-10-08T06:38:27.862659+00:00",
+  "models": {
+    "en": {
+      "sample_size": 200000,
+      "vocabulary": 10759,
+      "k": 16,
+      "reconstruction_err": 435.807191735291,
+      "sample_seconds": 14.4,
+      "fit_seconds": 35.02,
+      "topics": [
+        {
+          "id": "en-00",
+          "label": "Workout / Pre Workout / Pre",
+          "top_terms": [
+            "workout",
+            "pre workout",
+            "pre",
+            "morning",
+            "gym",
+            "feel",
+            "morning workout",
+            "tomorrow",
+            "nice",
+            "sleep",
+            "feeling",
+            "workout partner"
+          ]
+        },
+        {
+          "id": "en-01",
+          "label": "News / World / World News",
+          "top_terms": [
+            "news",
+            "world",
+            "world news",
+            "state",
+            "fake",
+            "fake news",
+            "china",
+            "islamic",
+            "syria",
+            "islamic state",
+            "local news",
+            "local"
+          ]
+        },
+        {
+          "id": "en-02",
+          "label": "Trump / Donald / Donald Trump",
+          "top_terms": [
+            "trump",
+            "donald",
+            "donald trump",
+            "president",
+            "president trump",
+            "breaking",
+            "supporters",
+            "media",
+            "trump supporters",
+            "anti",
+            "anti trump",
+            "look"
+          ]
+        },
+        {
+          "id": "en-03",
+          "label": "Exercise / Morning / Diet",
+          "top_terms": [
+            "exercise",
+            "morning",
+            "diet",
+            "eat",
+            "doing",
+            "motivation",
+            "healthy",
+            "bad",
+            "work",
+            "fat",
+            "form",
+            "sleep"
+          ]
+        },
+        {
+          "id": "en-04",
+          "label": "Man / Shot / Charged",
+          "top_terms": [
+            "man",
+            "shot",
+            "charged",
+            "man shot",
+            "arrested",
+            "killed",
+            "woman",
+            "man charged",
+            "death",
+            "man arrested",
+            "man killed",
+            "accused"
+          ]
+        },
+        {
+          "id": "en-05",
+          "label": "Weight / Lose / Lose Weight",
+          "top_terms": [
+            "weight",
+            "lose",
+            "lose weight",
+            "weight loss",
+            "loss",
+            "eat",
+            "fat",
+            "trying lose",
+            "trying",
+            "help",
+            "gain",
+            "help lose"
+          ]
+        },
+        {
+          "id": "en-06",
+          "label": "Sports / Game / Win",
+          "top_terms": [
+            "sports",
+            "game",
+            "win",
+            "open",
+            "state",
+            "nfl",
+            "warriors",
+            "wins",
+            "coach",
+            "lsu",
+            "season",
+            "cleveland"
+          ]
+        },
+        {
+          "id": "en-07",
+          "label": "Love / Hate / Lost",
+          "top_terms": [
+            "love",
+            "hate",
+            "lost",
+            "song",
+            "love love",
+            "god",
+            "music",
+            "happy",
+            "heart",
+            "peace",
+            "beautiful",
+            "true"
+          ]
+        },
+        {
+          "id": "en-08",
+          "label": "Hillary / Clinton / Hillary Clinton",
+          "top_terms": [
+            "hillary",
+            "clinton",
+            "hillary clinton",
+            "campaign",
+            "emails",
+            "election",
+            "breaking",
+            "fbi",
+            "sanders",
+            "vote",
+            "benghazi",
+            "bernie"
+          ]
+        },
+        {
+          "id": "en-09",
+          "label": "Black / Blacklivesmatter / Women",
+          "top_terms": [
+            "black",
+            "blacklivesmatter",
+            "women",
+            "lives",
+            "matter",
+            "black lives",
+            "lives matter",
+            "black women",
+            "men",
+            "woman",
+            "blacktwitter",
+            "black man"
+          ]
+        },
+        {
+          "id": "en-10",
+          "label": "Year / Old / Year Old",
+          "top_terms": [
+            "year",
+            "old",
+            "year old",
+            "girl",
+            "boy",
+            "old girl",
+            "old boy",
+            "missing",
+            "woman",
+            "old man",
+            "death",
+            "school"
+          ]
+        },
+        {
+          "id": "en-11",
+          "label": "Obama / President / President Obama",
+          "top_terms": [
+            "obama",
+            "president",
+            "president obama",
+            "barack",
+            "michelle",
+            "isis",
+            "michelle obama",
+            "barack obama",
+            "tcot",
+            "president trump",
+            "breaking",
+            "years"
+          ]
+        },
+        {
+          "id": "en-12",
+          "label": "America / Life / God",
+          "top_terms": [
+            "america",
+            "life",
+            "god",
+            "maga",
+            "best",
+            "tcot",
+            "pjnet",
+            "work",
+            "stop",
+            "look",
+            "thank",
+            "better"
+          ]
+        },
+        {
+          "id": "en-13",
+          "label": "Police / Shooting / Local",
+          "top_terms": [
+            "police",
+            "shooting",
+            "local",
+            "officer",
+            "suspect",
+            "killed",
+            "police officer",
+            "dead",
+            "breaking",
+            "woman",
+            "shot",
+            "officers"
+          ]
+        },
+        {
+          "id": "en-14",
+          "label": "Politics / Sanders / Gop",
+          "top_terms": [
+            "politics",
+            "sanders",
+            "gop",
+            "state",
+            "clinton",
+            "debate",
+            "campaign",
+            "cleveland",
+            "cruz",
+            "cleveland politics",
+            "court",
+            "kasich"
+          ]
+        },
+        {
+          "id": "en-15",
+          "label": "White / House / White House",
+          "top_terms": [
+            "white",
+            "house",
+            "white house",
+            "breaking",
+            "white supremacist",
+            "supremacist",
+            "white supremacy",
+            "supremacy",
+            "trump white",
+            "supremacists",
+            "white supremacists",
+            "racist"
+          ]
+        }
+      ]
+    },
+    "ru": {
+      "sample_size": 200000,
+      "vocabulary": 28061,
+      "k": 12,
+      "reconstruction_err": 439.386058593725,
+      "sample_seconds": 6.9,
+      "fit_seconds": 23.68,
+      "topics": [
+        {
+          "id": "ru-00",
+          "label": "россии / сборной / сборной россии",
+          "top_terms": [
+            "россии",
+            "сборной",
+            "сборной россии",
+            "против россии",
+            "сборная",
+            "мид",
+            "сборная россии",
+            "мид россии",
+            "продажи",
+            "банк",
+            "россии сирии",
+            "нато"
+          ]
+        },
+        {
+          "id": "ru-01",
+          "label": "россия / путин россия / россия готова",
+          "top_terms": [
+            "россия",
+            "путин россия",
+            "россия готова",
+            "готова",
+            "россия образроссии",
+            "образроссии",
+            "история",
+            "россия сша",
+            "общество",
+            "украина",
+            "китай",
+            "россия новости"
+          ]
+        },
+        {
+          "id": "ru-02",
+          "label": "сша / трамп / обама",
+          "top_terms": [
+            "сша",
+            "трамп",
+            "обама",
+            "россией",
+            "санкции сша",
+            "трампа",
+            "госдеп",
+            "сми",
+            "президента",
+            "россию",
+            "сша сирии",
+            "ввс сша"
+          ]
+        },
+        {
+          "id": "ru-03",
+          "label": "путин / владимир / владимир путин",
+          "top_terms": [
+            "путин",
+            "владимир",
+            "владимир путин",
+            "помощью",
+            "путин россия",
+            "президент",
+            "рассказал",
+            "заявил",
+            "обама",
+            "путин рассказал",
+            "назвал",
+            "поздравил"
+          ]
+        },
+        {
+          "id": "ru-04",
+          "label": "сочи / олимпиада / городе",
+          "top_terms": [
+            "сочи",
+            "олимпиада",
+            "городе",
+            "праздник",
+            "городе сочи",
+            "сочи олимпиада",
+            "олимпиада праздник",
+            "праздник стихийное",
+            "стихийное",
+            "олимпиада сочи",
+            "мая",
+            "пройдет"
+          ]
+        },
+        {
+          "id": "ru-05",
+          "label": "видео / новое / новое видео",
+          "top_terms": [
+            "видео",
+            "новое",
+            "новое видео",
+            "появилось",
+            "появилось видео",
+            "сети",
+            "помощью",
+            "игил",
+            "опубликовано",
+            "места",
+            "понравилось видео",
+            "сети появилось"
+          ]
+        },
+        {
+          "id": "ru-06",
+          "label": "новости / тюмень / тюмень новости",
+          "top_terms": [
+            "новости",
+            "тюмень",
+            "тюмень новости",
+            "политика",
+            "украина",
+            "тюмени",
+            "новости политика",
+            "сми",
+            "ульяновск",
+            "ульяновск новости",
+            "области",
+            "экономика"
+          ]
+        },
+        {
+          "id": "ru-07",
+          "label": "юмор / осознание юмор / политика",
+          "top_terms": [
+            "юмор",
+            "осознание юмор",
+            "политика",
+            "возмездие",
+            "юмор политика",
+            "черный",
+            "тщательно",
+            "ятьтв",
+            "помощью",
+            "москва",
+            "звездныевойны",
+            "ять"
+          ]
+        },
+        {
+          "id": "ru-08",
+          "label": "против / санкции / санкции против",
+          "top_terms": [
+            "против",
+            "санкции",
+            "санкции против",
+            "против россии",
+            "новые",
+            "новые санкции",
+            "украины",
+            "турции",
+            "порошенко",
+            "ввести",
+            "санкций",
+            "евросоюз"
+          ]
+        },
+        {
+          "id": "ru-09",
+          "label": "осознание / оборона / осознание юмор",
+          "top_terms": [
+            "осознание",
+            "оборона",
+            "осознание юмор",
+            "осознание россия",
+            "демократия",
+            "осознание демократия",
+            "возмездиенеизбежно",
+            "здоровье",
+            "турция сирия",
+            "турция",
+            "ударвспину неедувтурцию",
+            "сирия ударвспину"
+          ]
+        },
+        {
+          "id": "ru-10",
+          "label": "фото / сегодня / москве",
+          "top_terms": [
+            "фото",
+            "сегодня",
+            "москве",
+            "человек",
+            "день",
+            "метро",
+            "рублей",
+            "год",
+            "лет",
+            "погибли",
+            "млн",
+            "новый"
+          ]
+        },
+        {
+          "id": "ru-11",
+          "label": "сирии / сми / вкс",
+          "top_terms": [
+            "сирии",
+            "сми",
+            "вкс",
+            "минобороны",
+            "операции",
+            "мид",
+            "су-",
+            "российских",
+            "боевиков",
+            "турции",
+            "террористов",
+            "оон"
+          ]
+        }
+      ]
+    }
+  }
+}
