@@ -187,3 +187,82 @@ export const datasetFields = [
   ['post_type, retweet', 'post_type, is_retweet', ''],
   ['(none)', 'hashtags, mentions, url_count, emojis', 'Extracted from the text during cleaning'],
 ]
+
+// Big Data Lab: experiments/results/spark_pipeline.json, spark_scaling.json, lake_formats.json, sharding.json
+export const bigdataHeadline = [
+  { value: '147 s', label: 'Spark pipeline on all 2.94M posts' },
+  { value: '2.48×', label: 'speed-up from 1 to 4 cores' },
+  { value: '20×', label: 'faster month query on partitioned Parquet' },
+  { value: '3', label: 'MongoDB shards behind one mongos' },
+]
+
+export const sparkStages = [
+  { stage: 'Bronze', sec: 37.7, what: '13 CSV files read as strings, lineage columns added, written as Parquet' },
+  { stage: 'Validate', sec: 3.7, what: '1 empty post rejected with a reason' },
+  { stage: 'Silver', sec: 92.2, what: 'cleaned, entities extracted, 1,392 duplicate ids dropped, partitioned by year/month' },
+  { stage: 'Gold', sec: 12.4, what: '5 aggregate tables: daily activity, hashtags, accounts, categories' },
+]
+
+export const sparkScaling = [
+  { size: '100K', sec: 20.6, rate: 4840 },
+  { size: '500K', sec: 36.2, rate: 13829 },
+  { size: '1M', sec: 49.2, rate: 20347 },
+  { size: '2.94M', sec: 112.4, rate: 26185 },
+]
+
+export const sparkCores = [
+  { cores: '1 core', sec: 279.3, speedup: '1.00×' },
+  { cores: '2 cores', sec: 151.9, speedup: '1.84×' },
+  { cores: '4 cores', sec: 112.4, speedup: '2.48×' },
+]
+
+export const lakeLayers = [
+  { layer: 'Raw CSV', mb: 1141, files: 13, note: 'as downloaded' },
+  { layer: 'Bronze', mb: 546, files: 8, note: 'Parquet, all strings, lineage' },
+  { layer: 'Silver', mb: 498, files: 74, note: 'typed, cleaned, 74 year/month folders' },
+  { layer: 'Gold', mb: 5.8, files: 9, note: '5 small aggregate tables' },
+]
+
+export const lakeCodecs = [
+  { codec: 'JSON', mb: 1834 },
+  { codec: 'Parquet, none', mb: 735 },
+  { codec: 'Parquet, snappy', mb: 503 },
+  { codec: 'Parquet, gzip', mb: 337 },
+  { codec: 'Parquet, zstd', mb: 319 },
+]
+
+export const lakeQueries = [
+  { query: 'One month by category', csv: 3.51, parquet: 1.01, partitioned: 0.17, speedup: '20.4×', files: '1 of 74' },
+  { query: 'Top hashtags of 2016', csv: 5.02, parquet: 3.03, partitioned: 0.33, speedup: '15.3×', files: '12 of 74' },
+  { query: 'Posts per language (all)', csv: 2.32, parquet: 0.25, partitioned: 0.27, speedup: '8.4×', files: '74 of 74' },
+]
+
+export const shardRouting = [
+  { query: 'Find one post by id', single: '0.6 ms', hashed: '1 shard · 0.9 ms', ranged: '3 shards · 1.4 ms' },
+  { query: 'Posts in one week', single: '25.8 ms', hashed: '3 shards · 22.7 ms', ranged: '1 shard · 36.1 ms' },
+  { query: 'Language mix of one week', single: '41.9 ms', hashed: '3 shards · 26.1 ms', ranged: '1 shard · 53.1 ms' },
+  { query: 'Category totals (all 1M)', single: '5.21 s', hashed: '3 shards · 2.32 s', ranged: '3 shards · 2.12 s' },
+]
+
+export const shardLoad = [
+  { setup: 'Standalone', rate: 64670 },
+  { setup: 'Hashed post_id', rate: 51160 },
+  { setup: 'Ranged created_at', rate: 65979 },
+]
+
+export const fiveVs = [
+  ['Volume', '2.94M posts, 1.14 GB raw CSV, 3.5 GB BSON in MongoDB; Spark processes it all in 147 s'],
+  ['Velocity', 'batch ingestion up to 26K rows/s in Spark; rollups refresh incrementally with $merge'],
+  ['Variety', '56 language values, emoji, URLs, nested documents, arrays, CSV / JSON / JSONL inputs'],
+  ['Veracity', 'validation with reasons, 1,392 duplicates removed, missing fields flagged, synthetic engagement labelled'],
+  ['Value', 'trends, anomalies and campaign phases that no single post shows'],
+]
+
+export const hadoopMap = [
+  ['Distributed storage', 'HDFS', 'Parquet lake partitioned by year/month'],
+  ['Batch processing', 'MapReduce', 'Spark stages: partial aggregate → shuffle → final aggregate'],
+  ['SQL on files', 'Hive', 'Spark SQL with partition and column pruning'],
+  ['NoSQL store', 'HBase', 'MongoDB documents with 12 indexes'],
+  ['Horizontal scaling', 'Region servers', 'MongoDB sharding, hashed and ranged keys'],
+  ['Resource manager', 'YARN', 'Spark local[N]; standalone, YARN or Kubernetes on a cluster'],
+]

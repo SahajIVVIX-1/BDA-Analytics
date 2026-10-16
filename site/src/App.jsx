@@ -6,6 +6,7 @@ import {
   REPO, aggregationOps, blob, codeLinks, collections, headline, indexVsScan, indexes, ingestionScaling,
   datasetSource, datasetFields, ingestionStats, nlpThroughput, postsPerYear, qualityFlags, rollupVsLive, screens, sentimentMix, sentimentModels,
   sentimentPipelineScaling, tree, trendExample, workers,
+  bigdataHeadline, fiveVs, hadoopMap, lakeCodecs, lakeLayers, lakeQueries, shardLoad, shardRouting, sparkCores, sparkScaling, sparkStages,
 } from './data.js'
 
 const NAV = [
@@ -15,6 +16,7 @@ const NAV = [
   ['mongodb', 'MongoDB'],
   ['methods', 'Methods'],
   ['results', 'Results'],
+  ['bigdata', 'Big Data Lab'],
   ['dashboard', 'Dashboard'],
   ['code', 'Code'],
 ]
@@ -574,6 +576,218 @@ function Results({ t }) {
   )
 }
 
+const BD_TABS = [
+  ['flow', 'Architecture flow'],
+  ['spark', 'Spark pipeline'],
+  ['lake', 'Data lake'],
+  ['sharding', 'Sharding'],
+  ['concepts', '5 Vs, CAP, Hadoop'],
+]
+
+function FlowDiagram() {
+  const box = (x, y, w, label, sub, fill) => (
+    <g key={label}>
+      <rect x={x} y={y} width={w} height={54} rx={10} fill={fill} fillOpacity="0.16" stroke={fill} strokeWidth="1.5" />
+      <text x={x + w / 2} y={y + 23} textAnchor="middle" className="svg-t">{label}</text>
+      <text x={x + w / 2} y={y + 41} textAnchor="middle" className="svg-s">{sub}</text>
+    </g>
+  )
+  const arrow = (x1, y1, x2, y2, k) => <line key={k} x1={x1} y1={y1} x2={x2} y2={y2} className="svg-arrow" markerEnd="url(#bd-arr)" />
+  return (
+    <svg viewBox="0 0 900 300" className="bd-flow" role="img" aria-label="Big Data Lab architecture: CSV files to bronze, silver and gold Parquet with Spark, silver loaded through mongos into three shards, results served to the dashboard">
+      <defs><marker id="bd-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" className="svg-head" /></marker></defs>
+      {box(10, 30, 140, '13 CSV files', '1.14 GB · 2.95M rows', C.sand)}
+      {box(190, 30, 140, 'Bronze', 'Parquet · raw strings', C.clay)}
+      {box(370, 30, 160, 'Silver', 'cleaned · year/month', C.clay)}
+      {box(570, 30, 140, 'Gold', '5 aggregates · 5.8 MB', C.clay)}
+      {box(750, 30, 140, 'FastAPI', '/api/bigdata', C.olive)}
+      {box(370, 150, 160, 'mongos router', 'reads chunk map', C.slate)}
+      {box(570, 150, 140, 'Config server', 'chunk → shard map', C.slate)}
+      {box(250, 236, 120, 'shard1rs', '~33% of docs', C.slate)}
+      {box(390, 236, 120, 'shard2rs', '~33% of docs', C.slate)}
+      {box(530, 236, 120, 'shard3rs', '~33% of docs', C.slate)}
+      {box(750, 150, 140, 'Dashboard', 'Big Data Lab tabs', C.olive)}
+      {arrow(150, 57, 188, 57, 'a')}{arrow(330, 57, 368, 57, 'b')}{arrow(530, 57, 568, 57, 'c')}{arrow(710, 57, 748, 57, 'd')}
+      {arrow(450, 84, 450, 148, 'e')}{arrow(530, 177, 568, 177, 'f')}
+      {arrow(420, 204, 320, 234, 'g')}{arrow(450, 204, 450, 234, 'h')}{arrow(480, 204, 580, 234, 'i')}
+      {arrow(820, 84, 820, 148, 'j')}
+      <text x={460} y={124} className="svg-s">Spark foreachPartition</text>
+    </svg>
+  )
+}
+
+function BigData({ t }) {
+  const [tab, setTab] = useState('flow')
+  return (
+    <Section
+      id="bigdata"
+      eyebrow="Big Data Lab"
+      title="Spark, a Parquet data lake and a sharded MongoDB cluster"
+      intro="An extension that adds the distributed side of the course on the same 2.94M posts: a PySpark pipeline that builds a bronze / silver / gold lake, and a MongoDB cluster with a config server, three shards and a mongos router. Measured on a 4-vCPU Linux VM with Spark 4.2.0 and MongoDB 8.0.23."
+    >
+      <div className="stats bd-stats">
+        {bigdataHeadline.map((h) => <div key={h.label} className="stat"><div className="stat-value">{h.value}</div><div className="stat-label">{h.label}</div></div>)}
+      </div>
+      <div className="tabs" role="tablist" aria-label="Big Data Lab">
+        {BD_TABS.map(([id, label]) => (
+          <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'tab active' : 'tab'} onClick={() => setTab(id)}>{label}</button>
+        ))}
+      </div>
+
+      {tab === 'flow' && (
+        <Card title="How data moves through the Big Data Lab" source="docs/bigdata.md" className="wide">
+          <div className="table-scroll"><FlowDiagram /></div>
+          <p className="note">
+            Spark reads the raw files once into bronze, cleans and de-duplicates into silver (one folder per month), and
+            aggregates gold. Silver is also loaded in parallel through <code>mongos</code>, which uses the config server's
+            chunk map to send each document to one of three shards. The dashboard reads the measured results through FastAPI.
+          </p>
+        </Card>
+      )}
+
+      {tab === 'spark' && (<>
+        <Card title="Pipeline stages on all 2,945,912 raw rows (s)" source="experiments/results/spark_pipeline.json" className="wide">
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={sparkStages} layout="vertical" margin={{ left: 8, right: 24 }}>
+              <CartesianGrid horizontal={false} stroke={t.grid} />
+              <XAxis type="number" stroke={t.axis} fontSize={12} unit="s" />
+              <YAxis type="category" dataKey="stage" width={80} stroke={t.axis} fontSize={12} />
+              <Tooltip {...Tip({ t })} formatter={(v) => [`${v} s`, 'time']} />
+              <Bar dataKey="sec" fill={C.clay} radius={[0, 4, 4, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+          <table className="table compact"><tbody>{sparkStages.map((s) => <tr key={s.stage}><th>{s.stage}</th><td>{s.what}</td><td className="num">{s.sec} s</td></tr>)}</tbody></table>
+          <p className="note">147 s in total, about 20,000 rows/s, 2,944,519 posts out. The cleaned text matched the Python pipeline field for field on the sample.</p>
+        </Card>
+        <div className="grid-2">
+          <Card title="Data scaling on 4 cores (s)" source="experiments/results/spark_scaling.json">
+            <ResponsiveContainer width="100%" height={240}>
+              <LineChart data={sparkScaling} margin={{ top: 8, right: 16, left: -12 }}>
+                <CartesianGrid vertical={false} stroke={t.grid} />
+                <XAxis dataKey="size" stroke={t.axis} fontSize={12} />
+                <YAxis stroke={t.axis} fontSize={12} unit="s" />
+                <Tooltip {...Tip({ t })} formatter={(v) => `${v} s`} />
+                <Line type="monotone" dataKey="sec" name="Total time" stroke={C.slate} strokeWidth={2.5} dot={{ r: 4 }} />
+              </LineChart>
+            </ResponsiveContainer>
+            <p className="note">100K rows still take 20.6 s (4,840 rows/s) because start-up cost is fixed; the full set runs at 26,185 rows/s.</p>
+          </Card>
+          <Card title="Core scaling on all rows (s)" source="experiments/results/spark_scaling.json">
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={sparkCores} margin={{ top: 8, right: 8, left: -12 }}>
+                <CartesianGrid vertical={false} stroke={t.grid} />
+                <XAxis dataKey="cores" stroke={t.axis} fontSize={12} />
+                <YAxis stroke={t.axis} fontSize={12} unit="s" />
+                <Tooltip {...Tip({ t })} formatter={(v) => `${v} s`} />
+                <Bar dataKey="sec" fill={C.olive} radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+            <div className="chips">{sparkCores.map((c) => <span key={c.cores} className="chip chip-strong">{c.cores}: {c.speedup}</span>)}</div>
+            <p className="note">Efficiency drops from 92% at 2 cores to 62% at 4: shuffles and the single disk are shared.</p>
+          </Card>
+        </div>
+      </>)}
+
+      {tab === 'lake' && (<>
+        <div className="grid-2">
+          <Card title="Size of each lake layer (MB)" source="experiments/results/spark_pipeline.json">
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={lakeLayers} margin={{ top: 8, right: 8, left: -4 }}>
+                <CartesianGrid vertical={false} stroke={t.grid} />
+                <XAxis dataKey="layer" stroke={t.axis} fontSize={12} />
+                <YAxis stroke={t.axis} fontSize={12} />
+                <Tooltip {...Tip({ t })} formatter={(v) => [`${fmt(v)} MB`, 'size']} />
+                <Bar dataKey="mb" radius={[4, 4, 0, 0]}>{lakeLayers.map((d, i) => <Cell key={d.layer} fill={[C.sand, C.clay, C.slate, C.olive][i]} />)}</Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            <table className="table compact"><tbody>{lakeLayers.map((l) => <tr key={l.layer}><th>{l.layer}</th><td>{l.note}</td><td className="num">{l.files} files</td></tr>)}</tbody></table>
+          </Card>
+          <Card title="The silver table in each format (MB)" source="experiments/results/lake_formats.json">
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={lakeCodecs} layout="vertical" margin={{ left: 8, right: 24 }}>
+                <CartesianGrid horizontal={false} stroke={t.grid} />
+                <XAxis type="number" stroke={t.axis} fontSize={12} />
+                <YAxis type="category" dataKey="codec" width={110} stroke={t.axis} fontSize={12} />
+                <Tooltip {...Tip({ t })} formatter={(v) => [`${fmt(v)} MB`, 'size']} />
+                <Bar dataKey="mb" fill={C.slate} radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+            <p className="note">Columnar storage plus compression: zstd is 5.8× smaller than JSON; snappy (the default) trades size for faster reads.</p>
+          </Card>
+        </div>
+        <Card title="Same question, three layouts (s, median of 3)" source="experiments/results/lake_formats.json" className="wide">
+          <ResponsiveContainer width="100%" height={260}>
+            <BarChart data={lakeQueries} margin={{ top: 8, right: 8, left: -12 }}>
+              <CartesianGrid vertical={false} stroke={t.grid} />
+              <XAxis dataKey="query" stroke={t.axis} fontSize={12} />
+              <YAxis stroke={t.axis} fontSize={12} unit="s" />
+              <Tooltip {...Tip({ t })} formatter={(v) => `${v} s`} />
+              <Legend wrapperStyle={{ fontSize: 12 }} />
+              <Bar dataKey="csv" name="CSV" fill={C.sand} radius={[4, 4, 0, 0]} />
+              <Bar dataKey="parquet" name="Parquet" fill={C.slate} radius={[4, 4, 0, 0]} />
+              <Bar dataKey="partitioned" name="Partitioned Parquet" fill={C.clay} radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+          <div className="chips">{lakeQueries.map((q) => <span key={q.query} className="chip chip-strong">{q.query}: {q.speedup}, read {q.files} folders</span>)}</div>
+          <p className="note">Partition pruning skips folders that cannot match the filter; column pruning reads only the columns a query uses.</p>
+        </Card>
+      </>)}
+
+      {tab === 'sharding' && (<>
+        <Card title="Where each query goes, and how long it takes (1,000,898 posts, 3 shards)" source="experiments/results/sharding.json" className="wide">
+          <div className="table-scroll">
+            <table className="table compact">
+              <thead><tr><th>Query</th><th>Standalone</th><th>Hashed post_id</th><th>Ranged created_at</th></tr></thead>
+              <tbody>{shardRouting.map((r) => <tr key={r.query}><th>{r.query}</th><td>{r.single}</td><td>{r.hashed}</td><td>{r.ranged}</td></tr>)}</tbody>
+            </table>
+          </div>
+          <p className="note">
+            A filter on the shard key is targeted to one shard; anything else is scatter-gather to all three. Both keys spread
+            documents evenly (33.3–33.4% per shard; the ranged key was pre-split at the terciles). Whole-collection
+            aggregations ran 2.2–2.5× faster because each shard summed a third in parallel.
+          </p>
+        </Card>
+        <Card title="Load rate through mongos (docs/s)" source="experiments/results/sharding.json" className="wide">
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={shardLoad} layout="vertical" margin={{ left: 8, right: 24 }}>
+              <CartesianGrid horizontal={false} stroke={t.grid} />
+              <XAxis type="number" stroke={t.axis} fontSize={12} tickFormatter={(v) => `${v / 1000}K`} />
+              <YAxis type="category" dataKey="setup" width={140} stroke={t.axis} fontSize={12} />
+              <Tooltip {...Tip({ t })} formatter={(v) => [fmt(v), 'docs/s']} />
+              <Bar dataKey="rate" fill={C.olive} radius={[0, 4, 4, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+          <p className="note">All shards share one machine with one member each, so this shows routing and data layout, not the throughput or failover of separate servers.</p>
+        </Card>
+      </>)}
+
+      {tab === 'concepts' && (<>
+        <Card title="The five Vs in this project" className="wide">
+          <table className="table"><tbody>{fiveVs.map(([v, d]) => <tr key={v}><th>{v}</th><td>{d}</td></tr>)}</tbody></table>
+        </Card>
+        <div className="grid-2">
+          <Card title="CAP theorem: where MongoDB sits">
+            <p>
+              During a network partition a distributed system must give up either consistency or availability. MongoDB is
+              <strong> CP by default</strong>: one primary per replica set accepts writes; if it is cut off, writes stop until a
+              new primary is elected. Read preference and write concern trade some consistency for availability per operation.
+            </p>
+            <p className="note">An unreachable shard only affects queries that need its chunks, one more reason to match the shard key to the main queries.</p>
+          </Card>
+          <Card title="Hadoop ecosystem → this project">
+            <div className="table-scroll">
+              <table className="table compact">
+                <thead><tr><th>Concept</th><th>Classic</th><th>Here</th></tr></thead>
+                <tbody>{hadoopMap.map(([a, b, c]) => <tr key={a}><th>{a}</th><td>{b}</td><td>{c}</td></tr>)}</tbody>
+              </table>
+            </div>
+          </Card>
+        </div>
+      </>)}
+    </Section>
+  )
+}
+
 function Dashboard() {
   const [sel, setSel] = useState(0)
   const s = screens[sel]
@@ -641,6 +855,7 @@ export default function App() {
         <MongoDesign />
         <Methods t={t} />
         <Results t={t} />
+        <BigData t={t} />
         <Dashboard />
         <Code />
       </main>
