@@ -6,7 +6,7 @@ serves the results through a FastAPI REST API, and shows them in a React dashboa
 measure ingestion, indexing, aggregation and NLP at 100K, 500K, 1M and 2.95M documents.
 
 Everything runs on one machine with 16 GB of RAM and no GPU. There is no Spark, no cluster and no streaming:
-data is processed in batches by Python and MongoDB.
+data is processed in batches by Python and ====MongoDB.
 
 ![Overview page](docs/images/overview.png)
 
