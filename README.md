@@ -159,6 +159,7 @@ data/             raw/ processed/ sample/ (contents git-ignored)
 * [Dataset](docs/dataset.md)
 * [Big Data Lab: Spark, data lake, sharding, 5 Vs, CAP](docs/bigdata.md)
 * University material: [report](docs/report.md), [presentation](docs/presentation.md), [viva questions](docs/viva.md)
+* Submission files: [project report (PDF)](docs/submission/BDA-Analytics-Report.pdf), [project report (Word)](docs/submission/BDA-Analytics-Report.docx), [slides (PowerPoint)](docs/submission/BDA-Analytics-Presentation.pptx)
 
 ## What this project does not do
 

@@ -124,7 +124,7 @@ function Hero() {
       <p className="hero-lede">
         Almost three million real tweets streamed, cleaned and bulk-loaded into MongoDB, enriched with lightweight
         NLP, pre-aggregated with aggregation pipelines, served by FastAPI and explored in a React dashboard. All of
-        it on one 16&nbsp;GB machine with no GPU, no Spark and no cluster.
+        it on one 16&nbsp;GB machine with no GPU, plus a Big Data Lab with Apache Spark, a Parquet data lake and a sharded MongoDB cluster.
       </p>
       <div className="hero-actions">
         <a className="btn btn-primary" href={REPO}>View the code</a>
@@ -189,10 +189,10 @@ function Architecture() {
             {stack.map(([k, v]) => (<div key={k}><dt>{k}</dt><dd>{v}</dd></div>))}
           </dl>
         </Card>
-        <Card title="Deliberately not used">
+        <Card title="Scope and limits">
           <ul className="plain">
-            <li><strong>Spark / PySpark, Streamlit</strong>: excluded by the course brief.</li>
-            <li><strong>Distributed processing</strong>: one <code>mongod</code>, no sharding or replica set.</li>
+            <li><strong>Spark and sharding</strong>: only in the Big Data Lab extension; the dashboard pipeline runs on one <code>mongod</code>.</li>
+            <li><strong>One machine</strong>: Spark runs in local mode and the three shards share one host, one member per replica set.</li>
             <li><strong>Real-time streaming</strong>: data arrives through batch ingestion jobs.</li>
             <li><strong>Transformers and GPUs</strong>: scikit-learn models so everything runs on a CPU.</li>
             <li><strong>A 5M experiment</strong>: the real dataset has 2.95M posts and was not padded with synthetic posts.</li>
