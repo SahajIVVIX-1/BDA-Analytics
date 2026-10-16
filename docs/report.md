@@ -87,17 +87,48 @@ A layered batch analytics platform (see section 8):
 * a FastAPI service with a query planner that answers from rollups when possible and from live aggregation when
   needed;
 * a React dashboard;
-* an experiment harness that records every measurement with its hardware.
+* an experiment harness that records every measurement with its hardware;
+* a **Big Data Lab extension** (`bigdata/`, [bigdata.md](bigdata.md)): an Apache Spark pipeline that builds a
+  bronze / silver / gold Parquet data lake from the raw files, and a sharded MongoDB cluster (config server,
+  three shards, `mongos`) that compares hashed and ranged shard keys. The core platform runs without it.
 
 ## 7. Big Data Characteristics
 
-| Characteristic | In this project | Honest qualification |
+### 7.1 The five Vs
+
+| Characteristic | In this project | How it is handled | Honest qualification |
+| --- | --- | --- | --- |
+| Volume | 2,944,519 posts from 13 CSV files (1.14 GB); 3.5 GB uncompressed BSON in MongoDB plus 1.0 GB of indexes; 4.4M rows in the keyword rollup | Spark processes all rows in 147 s on 4 cores; Parquet stores silver in 498 MB; 1M posts spread over 3 shards | large for a laptop, small for industry |
+| Velocity | new data arrives through batch ingestion jobs; rollups refresh incrementally | batch ETL at up to 26,185 rows/s (Spark), incremental `$merge` | no real-time stream; velocity is simulated by uploads |
+| Variety | free text in 56 language values, emoji, URLs, nested author metadata, arrays of entities, CSV / JSON / JSONL inputs, optional real engagement in uploads | schema-on-read bronze, typed silver schema, MongoDB documents with `$jsonSchema` and multikey indexes | |
+| Veracity | duplicate ids, empty posts, missing language and location, spam-like posts, a collection gap, timestamps without time zone | validation with rejection reasons, de-duplication (1,392 ids), lineage columns, quality flags, synthetic data labelled | handled by validation, flags and documented assumptions |
+| Value | trends, anomalies and sentiment patterns not visible from individual posts | gold tables and rollups answer dashboard questions in milliseconds; partitioned Parquet answers ad-hoc questions 8-20× faster than CSV | findings describe a troll-account archive, not the public |
+
+### 7.2 CAP theorem
+
+In a distributed database, a network partition forces a choice between consistency (every read sees the latest
+write) and availability (every request gets an answer). MongoDB is **CP by default**: each shard is a replica set
+with a single primary that accepts writes, so two nodes never accept conflicting writes; if the primary is cut off,
+that shard refuses writes until a new primary is elected (seconds of unavailability). The trade-off is tunable per
+operation: `readPreference: secondaryPreferred` serves possibly stale reads for more availability, and
+`writeConcern: {w: 1}` acknowledges faster than the default `majority` at the risk of a rollback after failover.
+In a sharded cluster an unreachable shard only affects queries that need its chunks, which is a second reason,
+besides speed, to choose a shard key that matches the main queries. The experiment cluster uses one member per
+replica set, so it demonstrates routing and distribution but not fault tolerance. The Parquet lake gets
+consistency the HDFS way: files are written once and replaced as a whole.
+
+### 7.3 Mapping to the Hadoop ecosystem
+
+| Concept | Classic tool | In this project |
 | --- | --- | --- |
-| Volume | 2,944,814 posts; 3.5 GB uncompressed BSON (1.1 GB on disk) plus 1.0 GB of indexes in `posts`; 4.4M rows in the keyword rollup | large for a laptop, small for industry |
-| Variety | free text in 56 language values, emoji, URLs, nested author metadata, arrays of entities, CSV / JSON / JSONL inputs, optional real engagement in uploads | |
-| Velocity | new data arrives through batch ingestion jobs; rollups refresh incrementally | no real-time stream; velocity is simulated by uploads |
-| Veracity | duplicate ids, empty posts, missing language and location, spam-like posts, a collection gap, timestamps without time zone | handled by validation, flags and documented assumptions |
-| Value | trends, anomalies and sentiment patterns not visible from individual posts | findings describe a troll-account archive, not the public |
+| Distributed storage | HDFS | Parquet data lake partitioned by year/month (`data/lake`) |
+| Batch processing | MapReduce | Spark stages (partial aggregate → shuffle → final aggregate); MongoDB `$group` |
+| SQL on files | Hive | Spark SQL over Parquet with partition and column pruning |
+| NoSQL store | HBase / Cassandra | MongoDB documents with 12 indexes |
+| Horizontal scaling | region servers | MongoDB sharding with hashed and ranged shard keys |
+| OLAP cubes | Kylin, materialised views | gold tables and MongoDB rollup cubes |
+| Resource manager | YARN | Spark's local scheduler (`local[N]`); standalone, YARN or Kubernetes on a cluster |
+| Streaming | Kafka + Spark Streaming | not implemented (future work) |
 
 ## 8. Architecture
 
@@ -112,7 +143,18 @@ flowchart LR
     UP[Dashboard upload] --> API --> R
 ```
 
-Components and design decisions are described in [architecture.md](architecture.md). Key decisions: MongoDB is
+The Big Data Lab extension adds a second, distributed path from the same raw files:
+
+```mermaid
+flowchart LR
+    F[13 CSV files] --> B[Spark: bronze Parquet] --> S[Spark: silver Parquet<br/>partitioned year/month] --> G[Spark: gold aggregates]
+    S -- Spark foreachPartition --> M[mongos router]
+    M --> S1[(shard1rs)] & S2[(shard2rs)] & S3[(shard3rs)]
+    CFG[(config server RS)] -.chunk map.- M
+    G & M --> API[FastAPI /api/bigdata] --> UI[Big Data Lab page]
+```
+
+Components and design decisions are described in [architecture.md](architecture.md) and [bigdata.md](bigdata.md). Key decisions: MongoDB is
 the system of record and the aggregation engine; dashboard queries read pre-aggregated rollups when the filters
 allow; processing is batch-oriented and parallel within one machine.
 
@@ -127,8 +169,13 @@ allow; processing is batch-oriented and parallel within one machine.
 | Reporting | pandas 3.0 (experiment report generation) | tabulating measured results |
 | Frontend | React 19, Vite 8, Tailwind CSS 4, Recharts 3, React Router 7, lucide-react | modern component UI, fast builds, declarative charts |
 | Testing | pytest 9, FastAPI TestClient, Vitest 5, Testing Library, ruff, oxlint | |
+| Distributed processing (extension) | Apache Spark 4.2 (PySpark), Java 21 | parallel ETL over partitions; the same code runs on a cluster |
+| Lake storage (extension) | Apache Parquet (snappy), Hive-style partitions | columnar, compressed, partition and column pruning |
+| Scale-out database (extension) | MongoDB sharded cluster: config server RS, 3 shard RS, `mongos` | horizontal scaling by shard key |
+| Containers (extension) | Docker Compose | the Spark image and cluster need no local Java or MongoDB install |
 
-Not used, by design: Spark / PySpark, Streamlit (excluded by the brief), GPUs, transformer models.
+Not used: Streamlit, GPUs, transformer models. Spark is used only in the Big Data Lab extension (`bigdata/`); the
+core ingestion, NLP and dashboard pipeline does not depend on it.
 
 ## 10. Dataset
 
@@ -275,6 +322,15 @@ Experiments:
 
 The 5M size was not run: the real dataset has 2.95M posts and was not padded with synthetic data.
 
+Big Data Lab experiments ([bigdata.md](bigdata.md)):
+
+8. the Spark lake pipeline (bronze, silver, gold) on all 2.95M rows;
+9. Spark data scaling (100K to 2.95M rows) and core scaling (1, 2, 4 cores);
+10. storage formats and codecs (JSON, Parquet with none / snappy / gzip / zstd);
+11. the same three questions on CSV, Parquet and partitioned Parquet;
+12. a 3-shard MongoDB cluster with hashed and ranged shard keys against a standalone server (1M posts): load rate,
+    distribution and query routing.
+
 ## 21. Results
 
 All numbers below were measured on one cloud virtual machine (Intel Xeon @ 2.80 GHz, 4 vCPUs, 15.7 GB RAM,
@@ -344,10 +400,35 @@ enriching all 2.94M posts would take about 5 minutes (extrapolated, not measured
 **Sentiment model.** Validation macro-F1: logistic regression 0.650, VADER 0.560, Naive Bayes 0.506. Test
 macro-F1 0.582, accuracy 0.586, macro recall 0.593.
 
+### Big Data Lab results
+
+Measured on the same kind of 4-vCPU VM with Spark 4.2.0 and MongoDB 8.0.23 (details in [bigdata.md](bigdata.md)).
+
+**Spark pipeline.** 2,945,912 raw rows became 2,944,519 silver posts in 147 s (bronze 37.7 s, validation 3.7 s,
+silver 92.2 s, gold 12.4 s), about 20,000 rows/s. The cleaned output matched the Python pipeline field for field
+on the 1,000-row sample.
+
+**Spark scaling.** At 4 cores, 100K rows took 20.6 s and 2.94M rows 112.4 s (4,840 vs 26,185 rows/s): fixed
+start-up cost dominates small inputs. Going from 1 to 2 to 4 cores gave speed-ups of 1.84× and 2.48× (efficiency
+92% and 62%).
+
+**Storage.** Raw CSV 1.14 GB, bronze Parquet 546 MB, silver 498 MB in 74 partitions, gold 5.8 MB. The silver table
+was 1,834 MB as JSON, 735 MB as uncompressed Parquet, 503 MB with snappy, 337 MB with gzip and 319 MB with zstd.
+
+**Query layout.** A one-month query took 3.51 s on CSV, 1.01 s on Parquet and 0.17 s on partitioned Parquet
+(20×; 1 of 74 folders read); top hashtags for 2016 took 5.02 s, 3.03 s and 0.33 s (15×).
+
+**Sharding.** With 1M posts, the hashed key put 33.3-33.4% of documents on each shard; the ranged key, pre-split
+at the terciles, 33.3-33.4% too. Lookups by `post_id` went to 1 shard with the hashed key and to all 3 with the
+ranged key; one-week date ranges went to 1 shard with the ranged key and to all 3 with the hashed key. A
+whole-collection `$group` took 5.21 s standalone and 2.12-2.32 s sharded, because each shard aggregated a third
+in parallel. Writes through `mongos` were slower with the hashed key (51,160 vs 64,670 docs/s standalone).
+
 ## 22. Limitations
 
-* **Single machine.** No sharding, replication or distributed processing; scaling beyond one server is
-  discussed, not implemented.
+* **Single machine.** Spark runs in local mode and all shards of the experiment cluster share one machine, with
+  one member per replica set: the extension demonstrates distributed processing, routing and data distribution,
+  not the throughput or fault tolerance of separate servers.
 * **Batch, not real time.** New data becomes visible after its ingestion job and rollup refresh.
 * **Dataset.** Troll-account archive, not representative; time zone assumed; account-level location only.
 * **Synthetic engagement.** No real likes, replies or shares exist in the source.
@@ -363,7 +444,11 @@ macro-F1 0.582, accuracy 0.586, macro recall 0.593.
 * Transformer sentiment models (for example a Twitter-specific RoBERTa) on a GPU, evaluated on a labelled sample
   of the target data.
 * Topic count chosen by coherence; BERTopic or embedding-based clustering.
-* A replica set and a sharded `posts` collection; measuring aggregation scaling across shards.
+* Three-member replica sets on separate hosts, with a failover test (kill a primary during a load).
+* Running the Spark jobs on a real multi-node cluster (standalone, YARN or Kubernetes) and the dashboard on the
+  sharded cluster.
+* Spark MLlib versions of the sentiment and topic models.
+* Kafka plus Spark Structured Streaming for real-time ingestion.
 * Streaming ingestion with MongoDB change streams feeding incremental rollups.
 * A job queue for ingestion and a shared cache (Redis) for multiple API workers.
 * Authentication and role-based access for the API.
@@ -376,7 +461,10 @@ The project shows that a single 16 GB machine with MongoDB at its core can inges
 analytics over almost three million social media posts. The decisive techniques were the ones the Big Data
 course emphasises: streaming instead of loading everything, bulk writes in batches, parallel processing,
 building indexes after bulk loads, indexes matched to query patterns, keeping computation inside the database,
-and pre-aggregating for interactive use. The experiments quantify each of these. The analytical layer works end to
+and pre-aggregating for interactive use. The Big Data Lab extension adds the distributed side: Spark processes
+the whole archive in about two and a half minutes, a partitioned Parquet lake answers ad-hoc questions up to 20×
+faster than CSV, and a sharded MongoDB cluster shows how the shard key decides which queries are targeted and
+which are broadcast. The experiments quantify each of these. The analytical layer works end to
 end, with clear limits: sentiment accuracy is modest and unvalidated on this domain, engagement is synthetic, and
 the dataset describes a specific influence operation rather than public opinion. Those limits are stated in the
 system itself as well as in this report.

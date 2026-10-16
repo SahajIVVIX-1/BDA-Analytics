@@ -105,13 +105,14 @@ processes; bulk inserts in batches; builds indexes after loading; computes every
 into rollups so dashboard queries read about 130K rows instead of 2.9M; refreshes rollups only for the days an
 upload touches. Experiments measure how time grows from 100K to 2.95M posts.
 
-*What it would need beyond one machine (not implemented):* sharding `posts` across several MongoDB servers,
-a replica set, a job queue for ingestion, and a shared cache. The pipelines themselves would run unchanged on a
-sharded cluster.
+*Distributed side (Big Data Lab, [bigdata.md](bigdata.md)):* Spark processes all 2.95M rows in parallel tasks
+(2.48× faster on 4 cores than on 1 *(measured)*), and a 3-shard MongoDB cluster splits the posts by shard key.
+What is still missing for production: shards and replica-set members on separate servers, a job queue for
+ingestion and a shared cache.
 
 ## What are the limitations?
 
-* Single machine; no distributed processing, no streaming.
+* Spark runs in local mode and the sharded cluster runs on one machine with one member per replica set; no streaming.
 * The dataset is a troll-account archive, not representative of Twitter users.
 * Engagement is synthetic.
 * Sentiment is English-only, modest accuracy, not validated on this dataset.
@@ -137,13 +138,69 @@ From the measured tables in [performance.md](performance.md) (one 4-vCPU cloud V
 6. NLP inference runs at about 18,000-26,000 texts per second on a CPU; with two or more workers the
    end-to-end enrichment job is limited by database writes rather than by the models (section 7).
 
+## What does Spark do here, and how does it work?
+
+Spark reads the 13 CSV files into a DataFrame split into partitions. Transformations (`where`, `select`,
+`regexp_extract_all`, `groupBy`) are lazy: Spark builds a plan and only runs it when an action (`write`, `count`)
+needs a result. The plan is split into **stages** at every **shuffle** (for example `dropDuplicates(post_id)`
+moves rows with the same id to the same task); each stage runs one **task per partition**, one per core at a time.
+
+*Evidence:* `bigdata/spark/lake.py`; the physical plan in the Big Data Lab → Spark → Execution plan view shows
+`partial_count` → `Exchange hashpartitioning` → `count`, the MapReduce pattern.
+
+## What is a data lake, and why bronze / silver / gold?
+
+A data lake keeps data as files in open formats, organised in layers. **Bronze** is the raw data exactly as
+received (all strings, plus lineage), so nothing is lost and later steps can be re-run. **Silver** is validated,
+cleaned, typed, de-duplicated data. **Gold** is small aggregates for specific questions.
+
+*Evidence:* 1.14 GB CSV → 546 MB bronze → 498 MB silver (74 partitions) → 5.8 MB gold *(measured)*.
+
+## Why Parquet and partitioning?
+
+Parquet is columnar: a query reads only the columns it uses, and similar values compress well. Partitioning by
+`year/month` creates one folder per month, so a filter on the month skips the other folders entirely
+(**partition pruning**).
+
+*Evidence:* posts per category in October 2016: CSV 3.51 s, Parquet 1.01 s, partitioned Parquet 0.17 s, reading 1 of
+74 folders (20× faster). zstd made silver 319 MB vs 503 MB with snappy *(measured)*.
+
+## What is sharding, and how did you choose the shard key?
+
+Sharding splits one collection across several servers (**shards**) by a **shard key**. The key's value range is
+cut into **chunks**; a **config server** stores which shard owns each chunk and the **mongos** router uses that map
+to send each query only where it is needed. A query that filters on the shard key is **targeted** (one shard);
+otherwise it is **scatter-gather** (all shards, results merged).
+
+*Evidence (1M posts, 3 shards, measured):* hashed `post_id` spread documents 33.3 / 33.4 / 33.3% and sent id
+lookups to 1 shard but date ranges to 3; ranged `created_at`, pre-split at the terciles, sent one-week queries to 1
+shard but id lookups to 3. A whole-collection `$group` ran in 2.1-2.3 s sharded vs 5.2 s standalone. So the key
+should match the most frequent filter, and a monotonic key like a timestamp must be pre-split or it creates a hot
+shard.
+
+## What is the CAP theorem, and where is MongoDB?
+
+During a network partition a distributed system must give up either consistency or availability. MongoDB is
+**CP** by default: one primary per replica set takes all writes; if it is cut off, writes stop until a new primary
+is elected. Read preference and write concern let you trade some consistency for availability per operation.
+
+## What are the 5 Vs here?
+
+Volume 2.95M posts / 1.14 GB raw; Velocity batch at up to 26K rows/s, incremental `$merge` refresh; Variety
+56 languages, nested documents, arrays, CSV/JSON/JSONL; Veracity validation, 1,392 duplicates removed, synthetic
+engagement flagged; Value trends, anomalies, hashtag lifetimes, campaign phases. The Big Data Lab → Course concepts
+tab shows each with its measured numbers.
+
 ## Other likely questions
 
 **Is the data real?** The posts are real tweets from the FiveThirtyEight / Clemson dataset. Engagement counts are
 synthetic and labelled as such everywhere.
 
-**Why not Spark?** The brief excluded it, and the data fits on one machine; MongoDB aggregation plus Python
-multiprocessing covers the processing needs.
+**Why Spark, if the data fits on one machine?** The core platform does not need it: MongoDB aggregation plus
+Python multiprocessing covers the dashboard. Spark is added in the Big Data Lab to show the distributed model
+(partitions, tasks, shuffles, lazy evaluation) on real data. The same code runs on a cluster by changing the
+master URL, and the measurements show where it helps (26K rows/s on 4 cores) and where it does not (100K rows take
+20 s because of fixed start-up cost).
 
 **What happens with a new upload?** It is stored, ingested in batches (duplicates rejected by the unique index),
 enriched with NLP, and only the affected days of each rollup are recomputed with `$merge`.

@@ -1,0 +1,123 @@
+{
+  "experiment": "spark_scaling",
+  "run_at": "2026-10-16T12:00:11.845869+00:00",
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "label": "Cloud VM (Linux, 4 vCPU, 15 GiB RAM)",
+    "spark": "4.2.0"
+  },
+  "runs": [
+    {
+      "size_requested": 100000,
+      "rows": 99845,
+      "cores": 4,
+      "silver_sec": 15.272,
+      "gold_sec": 5.357,
+      "total_sec": 20.629,
+      "rows_per_sec": 4840.0,
+      "silver_read_partitions": 4
+    },
+    {
+      "size_requested": 500000,
+      "rows": 500580,
+      "cores": 4,
+      "silver_sec": 28.944,
+      "gold_sec": 7.253,
+      "total_sec": 36.197,
+      "rows_per_sec": 13829.3,
+      "silver_read_partitions": 4
+    },
+    {
+      "size_requested": 1000000,
+      "rows": 1001186,
+      "cores": 4,
+      "silver_sec": 39.782,
+      "gold_sec": 9.423,
+      "total_sec": 49.205,
+      "rows_per_sec": 20347.2,
+      "silver_read_partitions": 4
+    },
+    {
+      "size_requested": "all",
+      "rows": 2944519,
+      "cores": 4,
+      "silver_sec": 99.235,
+      "gold_sec": 13.214,
+      "total_sec": 112.449,
+      "rows_per_sec": 26185.4,
+      "silver_read_partitions": 7
+    },
+    {
+      "size_requested": "all",
+      "rows": 2944519,
+      "cores": 1,
+      "silver_sec": 263.975,
+      "gold_sec": 15.301,
+      "total_sec": 279.276,
+      "rows_per_sec": 10543.4,
+      "silver_read_partitions": 6
+    },
+    {
+      "size_requested": "all",
+      "rows": 2944519,
+      "cores": 2,
+      "silver_sec": 139.215,
+      "gold_sec": 12.73,
+      "total_sec": 151.945,
+      "rows_per_sec": 19378.8,
+      "silver_read_partitions": 7
+    }
+  ],
+  "speedup": [
+    {
+      "cores": 1,
+      "total_sec": 279.276,
+      "speedup": 1.0,
+      "efficiency": 1.0
+    },
+    {
+      "cores": 2,
+      "total_sec": 151.945,
+      "speedup": 1.84,
+      "efficiency": 0.92
+    },
+    {
+      "cores": 4,
+      "total_sec": 112.449,
+      "speedup": 2.48,
+      "efficiency": 0.62
+    }
+  ],
+  "python_pipeline_reference": [
+    {
+      "size_requested": 100000,
+      "rows": 100000,
+      "elapsed_sec": 9.098,
+      "rows_per_sec": 10991.5
+    },
+    {
+      "size_requested": 500000,
+      "rows": 500000,
+      "elapsed_sec": 42.319,
+      "rows_per_sec": 11815.0
+    },
+    {
+      "size_requested": 1000000,
+      "rows": 1000000,
+      "elapsed_sec": 90.976,
+      "rows_per_sec": 10991.9
+    },
+    {
+      "size_requested": "all",
+      "rows": 2944814,
+      "elapsed_sec": 297.101,
+      "rows_per_sec": 9916.5
+    }
+  ],
+  "note": "Spark runs read bronze Parquet and write silver + gold Parquet. The Python reference reads CSV and inserts into MongoDB with deferred indexes, so it is a comparison of pipelines, not of identical work."
+}

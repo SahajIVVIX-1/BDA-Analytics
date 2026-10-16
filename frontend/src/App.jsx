@@ -16,6 +16,7 @@ const Explorer = lazy(() => import('./pages/Explorer'))
 const Performance = lazy(() => import('./pages/Performance'))
 const Ingestion = lazy(() => import('./pages/Ingestion'))
 const AboutDataset = lazy(() => import('./pages/AboutDataset'))
+const BigDataLab = lazy(() => import('./pages/BigDataLab'))
 
 function NotFound() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
               <Route path="explorer" element={<Explorer />} />
               <Route path="performance" element={<Performance />} />
               <Route path="ingestion" element={<Ingestion />} />
+              <Route path="bigdata" element={<BigDataLab />} />
               <Route path="dataset" element={<AboutDataset />} />
               <Route path="*" element={<NotFound />} />
             </Route>

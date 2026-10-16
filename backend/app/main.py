@@ -15,7 +15,7 @@ from fastapi.responses import JSONResponse
 from pymongo.errors import PyMongoError, ServerSelectionTimeoutError
 
 from app import __version__
-from app.api import analytics, ingestion, performance, posts
+from app.api import analytics, bigdata, ingestion, performance, posts
 from app.api.json import MongoJSONResponse
 from app.config import get_settings
 from app.database import mongo
@@ -72,3 +72,4 @@ app.include_router(analytics.router)
 app.include_router(posts.router)
 app.include_router(ingestion.router)
 app.include_router(performance.router)
+app.include_router(bigdata.router)

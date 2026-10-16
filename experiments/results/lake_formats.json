@@ -1,0 +1,99 @@
+{
+  "experiment": "lake_formats",
+  "run_at": "2026-10-16T12:02:35.022247+00:00",
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "spark": "4.2.0",
+    "java": "21.0.12.1",
+    "label": "Cloud VM (Linux, 4 vCPU, 15 GiB RAM)"
+  },
+  "storage": [
+    {
+      "layer": "Raw CSV",
+      "format": "CSV",
+      "bytes": 1140564435,
+      "files": 13
+    },
+    {
+      "layer": "Bronze",
+      "format": "Parquet (snappy)",
+      "bytes": 546295858,
+      "files": 8
+    },
+    {
+      "layer": "Silver",
+      "format": "Parquet (snappy), partitioned year/month",
+      "bytes": 497849411,
+      "files": 74
+    }
+  ],
+  "codecs": [
+    {
+      "codec": "none",
+      "bytes": 734563162,
+      "write_sec": 13.491
+    },
+    {
+      "codec": "snappy",
+      "bytes": 503233831,
+      "write_sec": 11.194
+    },
+    {
+      "codec": "gzip",
+      "bytes": 337351763,
+      "write_sec": 23.21
+    },
+    {
+      "codec": "zstd",
+      "bytes": 318727166,
+      "write_sec": 14.259
+    },
+    {
+      "codec": "json (uncompressed)",
+      "bytes": 1834320431,
+      "write_sec": 15.21
+    }
+  ],
+  "queries": [
+    {
+      "query": "category_oct_2016",
+      "description": "Posts per account category in October 2016",
+      "silver_files_read": 1,
+      "silver_files_total": 74,
+      "csv_sec": 3.513,
+      "parquet_sec": 1.013,
+      "partitioned_sec": 0.172,
+      "speedup_vs_csv": 20.4
+    },
+    {
+      "query": "top_hashtags_2016",
+      "description": "Top 20 hashtags in 2016",
+      "silver_files_read": 12,
+      "silver_files_total": 74,
+      "csv_sec": 5.015,
+      "parquet_sec": 3.034,
+      "partitioned_sec": 0.327,
+      "speedup_vs_csv": 15.3
+    },
+    {
+      "query": "posts_by_language",
+      "description": "Posts per language, whole dataset (full scan, one column)",
+      "silver_files_read": 74,
+      "silver_files_total": 74,
+      "csv_sec": 2.315,
+      "parquet_sec": 0.248,
+      "partitioned_sec": 0.274,
+      "speedup_vs_csv": 8.4
+    }
+  ],
+  "params": {
+    "repeat": 3,
+    "statistic": "median",
+    "lake_dir": "data/lake"
+  }
+}

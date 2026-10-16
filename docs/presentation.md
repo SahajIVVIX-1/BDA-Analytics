@@ -9,7 +9,7 @@ make. Screenshots come from the running dashboard; numbers from [performance.md]
 | 2 | Problem | a few example tweets from the Explorer; the volume per day chart | millions of short, noisy, multilingual posts cannot be read by hand; we need storage, processing and analytics that scale |
 | 3 | Objectives | 5 bullets: ingest at scale, store in MongoDB, analyse (sentiment, topics, trends, anomalies), serve via API + dashboard, measure performance | |
 | 4 | Dataset | table from [dataset.md](dataset.md): 2.95M real IRA tweets, fields, licence; what is missing | be upfront: troll accounts not public opinion; engagement synthetic and labelled |
-| 5 | Architecture | the diagram from [architecture.md](architecture.md) | batch pipeline on one machine, MongoDB at the centre, no Spark |
+| 5 | Architecture | Big Data Lab → Architecture diagram (click a box) | MongoDB at the centre for the dashboard; Spark, a Parquet lake and a sharded cluster for the distributed side |
 | 6 | MongoDB design | the `posts` document, validator, index table | document model fits nested posts; every index answers a real query |
 | 7 | Ingestion and cleaning | pipeline steps, cleaning statistics from the ingestion job | streaming + batches + bulk insert, duplicates rejected by the unique index |
 | 8 | Aggregation pipelines | the hashtag rollup pipeline; list of operators used | computation happens in MongoDB; rollups make the dashboard fast |
@@ -19,6 +19,9 @@ make. Screenshots come from the running dashboard; numbers from [performance.md]
 | 12 | Experiment set-up | hardware line, sizes, what was measured, how (median of runs, explain) | |
 | 13 | Results: ingestion and indexes | tables/charts from performance.md sections 1-5 | linear ingestion; deferred indexes; index vs collection scan |
 | 14 | Results: aggregation and NLP | sections 6-7: rollup vs live speed-up, NLP throughput | pre-aggregation is the biggest win for dashboards |
+| 14a | Spark and the data lake | Big Data Lab → Architecture diagram, Spark → Pipeline run and Scaling, Data lake → Query speed | parallel ETL on all 2.95M rows in 147 s; partitioned Parquet answers a one-month query 20× faster than CSV |
+| 14b | Sharding | Big Data Lab → Sharding → Cluster and Query routing | the shard key decides which queries hit one shard and which hit all three |
+| 14c | Course concepts | Big Data Lab → Course concepts: 5 Vs, CAP, Hadoop map | where each classic Big Data idea appears in the project |
 | 15 | Limitations and future work | list from [report.md](report.md) sections 22-23 | single machine, no streaming, synthetic engagement, model accuracy |
 | 16 | Conclusion | 3 take-aways | |
 

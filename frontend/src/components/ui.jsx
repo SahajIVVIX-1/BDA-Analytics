@@ -1,4 +1,5 @@
 import { AlertTriangle, Database, FlaskConical, Inbox, Info, RefreshCw } from 'lucide-react'
+import { useSearchParams } from 'react-router-dom'
 import { fmtMs } from '../utils/format'
 
 export function Card({ title, subtitle, actions, children, className = '', badges, bodyClass = '' }) {
@@ -102,7 +103,7 @@ export function Note({ children }) {
   )
 }
 
-export function Segmented({ value, onChange, options, label }) {
+export function Segmented({ value, onChange, options, label, keepCase = false }) {
   return (
     <div role="radiogroup" aria-label={label} className="inline-flex rounded-lg border border-line bg-surface-2 p-0.5">
       {options.map((o) => {
@@ -111,7 +112,7 @@ export function Segmented({ value, onChange, options, label }) {
         const active = v === value
         return (
           <button key={v} role="radio" aria-checked={active} onClick={() => onChange(v)}
-            className={`rounded-md px-2.5 py-1 text-xs capitalize transition-colors ${active ? 'bg-surface text-ink shadow-sm' : 'text-muted hover:text-ink'}`}>
+            className={`rounded-md px-2.5 py-1 text-xs transition-colors ${keepCase ? '' : 'capitalize'} ${active ? 'bg-surface text-ink shadow-sm' : 'text-muted hover:text-ink'}`}>
             {l}
           </button>
         )
@@ -168,4 +169,50 @@ export function Table({ columns, rows, rowKey, onRowClick, dense }) {
       </table>
     </div>
   )
+}
+
+// Tabs keep long pages to one screen of content at a time. The active tab lives in the URL (?tab=…)
+// so a tab can be bookmarked and shared, like the global filters.
+// `reset` lists params cleared on change, e.g. a sub-view that belongs to the previous tab.
+export function useTab(ids, param = 'tab', reset = []) {
+  const [params, setParams] = useSearchParams()
+  const current = ids.includes(params.get(param)) ? params.get(param) : ids[0]
+  const setTab = (id) => setParams((prev) => {
+    const next = new URLSearchParams(prev)
+    if (id === ids[0]) next.delete(param)
+    else next.set(param, id)
+    reset.forEach((k) => next.delete(k))
+    return next
+  }, { replace: true })
+  return [current, setTab]
+}
+
+export function Tabs({ tabs, value, onChange, label = 'Sections' }) {
+  const onKey = (e, i) => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
+    if (!d) return
+    const t = tabs[(i + d + tabs.length) % tabs.length]
+    onChange(t.id)
+    document.getElementById(`tab-${t.id}`)?.focus()
+  }
+  return (
+    <div role="tablist" aria-label={label} className="mb-4 flex gap-1 overflow-x-auto border-b border-line">
+      {tabs.map((t, i) => {
+        const active = t.id === value
+        const Icon = t.icon
+        return (
+          <button key={t.id} id={`tab-${t.id}`} role="tab" aria-selected={active} aria-controls={`panel-${t.id}`}
+            tabIndex={active ? 0 : -1} onClick={() => onChange(t.id)} onKeyDown={(e) => onKey(e, i)}
+            className={`-mb-px flex shrink-0 items-center gap-1.5 border-b-2 px-3 py-2 text-sm transition-colors ${
+              active ? 'border-accent font-medium text-accent' : 'border-transparent text-ink-2 hover:text-ink'}`}>
+            {Icon && <Icon size={15} aria-hidden />} {t.label}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+export function TabPanel({ id, children }) {
+  return <div role="tabpanel" id={`panel-${id}`} aria-labelledby={`tab-${id}`}>{children}</div>
 }

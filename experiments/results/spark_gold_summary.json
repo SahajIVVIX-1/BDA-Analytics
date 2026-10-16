@@ -1,0 +1,3109 @@
+{
+  "experiment": "spark_gold_summary",
+  "run_at": "2026-10-16T11:45:00.227543+00:00",
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "spark": "4.2.0",
+    "java": "21.0.12.1",
+    "label": "Cloud VM (Linux, 4 vCPU, 15 GiB RAM)"
+  },
+  "row_counts": {
+    "daily_activity": 52630,
+    "hashtag_daily": 417733,
+    "top_hashtags": 105227,
+    "account_stats": 2883,
+    "monthly_category": 309
+  },
+  "monthly_total": [
+    {
+      "year": 2012,
+      "month": 2,
+      "posts": 37
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "posts": 33
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "posts": 27
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "posts": 29
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "posts": 29
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "posts": 98
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "posts": 124
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "posts": 24
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "posts": 31
+    },
+    {
+      "year": 2012,
+      "month": 11,
+      "posts": 26
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "posts": 30
+    },
+    {
+      "year": 2013,
+      "month": 1,
+      "posts": 29
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "posts": 14
+    },
+    {
+      "year": 2013,
+      "month": 3,
+      "posts": 34
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "posts": 24
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "posts": 26
+    },
+    {
+      "year": 2013,
+      "month": 6,
+      "posts": 32
+    },
+    {
+      "year": 2013,
+      "month": 7,
+      "posts": 31
+    },
+    {
+      "year": 2013,
+      "month": 8,
+      "posts": 3
+    },
+    {
+      "year": 2013,
+      "month": 10,
+      "posts": 1
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "posts": 5
+    },
+    {
+      "year": 2014,
+      "month": 1,
+      "posts": 2
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "posts": 3
+    },
+    {
+      "year": 2014,
+      "month": 3,
+      "posts": 1
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "posts": 4
+    },
+    {
+      "year": 2014,
+      "month": 5,
+      "posts": 2
+    },
+    {
+      "year": 2014,
+      "month": 6,
+      "posts": 29
+    },
+    {
+      "year": 2014,
+      "month": 7,
+      "posts": 57
+    },
+    {
+      "year": 2014,
+      "month": 8,
+      "posts": 90
+    },
+    {
+      "year": 2014,
+      "month": 9,
+      "posts": 51
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "posts": 192
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "posts": 3277
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "posts": 4014
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "posts": 15820
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "posts": 14003
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "posts": 18376
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "posts": 13386
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "posts": 27364
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "posts": 68760
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "posts": 144763
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "posts": 119438
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "posts": 67604
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "posts": 82896
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "posts": 132303
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "posts": 116730
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "posts": 66129
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "posts": 85770
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "posts": 79191
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "posts": 65620
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "posts": 77626
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "posts": 78820
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "posts": 65028
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "posts": 81361
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "posts": 105088
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "posts": 140497
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "posts": 122263
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "posts": 155516
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "posts": 135251
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "posts": 100538
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "posts": 128378
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "posts": 131273
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "posts": 60605
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "posts": 51652
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "posts": 82894
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "posts": 188670
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "posts": 49952
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "posts": 28776
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "posts": 16684
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "posts": 9779
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "posts": 1912
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "posts": 2037
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "posts": 1715
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "posts": 731
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "posts": 911
+    }
+  ],
+  "monthly_category": [
+    {
+      "year": 2012,
+      "month": 2,
+      "account_category": "LeftTroll",
+      "posts": 5,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 2,
+      "account_category": "NonEnglish",
+      "posts": 32,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "account_category": "LeftTroll",
+      "posts": 12,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "account_category": "NonEnglish",
+      "posts": 21,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "account_category": "LeftTroll",
+      "posts": 3,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "account_category": "NonEnglish",
+      "posts": 24,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "account_category": "LeftTroll",
+      "posts": 7,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "account_category": "NonEnglish",
+      "posts": 22,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "account_category": "LeftTroll",
+      "posts": 8,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "account_category": "NonEnglish",
+      "posts": 21,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "account_category": "HashtagGamer",
+      "posts": 72,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "account_category": "LeftTroll",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "account_category": "NonEnglish",
+      "posts": 24,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "account_category": "HashtagGamer",
+      "posts": 47,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "account_category": "NonEnglish",
+      "posts": 77,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "account_category": "NonEnglish",
+      "posts": 24,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "account_category": "LeftTroll",
+      "posts": 7,
+      "accounts": 2
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "account_category": "NonEnglish",
+      "posts": 24,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 11,
+      "account_category": "LeftTroll",
+      "posts": 4,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 11,
+      "account_category": "NonEnglish",
+      "posts": 22,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "account_category": "LeftTroll",
+      "posts": 4,
+      "accounts": 1
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "account_category": "NonEnglish",
+      "posts": 26,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 1,
+      "account_category": "LeftTroll",
+      "posts": 3,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 1,
+      "account_category": "NonEnglish",
+      "posts": 26,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "account_category": "LeftTroll",
+      "posts": 2,
+      "accounts": 2
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "account_category": "NonEnglish",
+      "posts": 12,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 3,
+      "account_category": "NonEnglish",
+      "posts": 34,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "account_category": "LeftTroll",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "account_category": "NonEnglish",
+      "posts": 23,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "account_category": "LeftTroll",
+      "posts": 14,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "account_category": "NonEnglish",
+      "posts": 12,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 6,
+      "account_category": "LeftTroll",
+      "posts": 32,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 7,
+      "account_category": "LeftTroll",
+      "posts": 29,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 7,
+      "account_category": "NonEnglish",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 8,
+      "account_category": "LeftTroll",
+      "posts": 3,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 10,
+      "account_category": "NonEnglish",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "account_category": "LeftTroll",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "account_category": "NonEnglish",
+      "posts": 4,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 1,
+      "account_category": "NonEnglish",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "account_category": "LeftTroll",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "account_category": "NonEnglish",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 3,
+      "account_category": "NonEnglish",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "account_category": "LeftTroll",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "account_category": "NonEnglish",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 5,
+      "account_category": "NonEnglish",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 6,
+      "account_category": "NonEnglish",
+      "posts": 29,
+      "accounts": 2
+    },
+    {
+      "year": 2014,
+      "month": 7,
+      "account_category": "NonEnglish",
+      "posts": 57,
+      "accounts": 2
+    },
+    {
+      "year": 2014,
+      "month": 8,
+      "account_category": "NonEnglish",
+      "posts": 90,
+      "accounts": 2
+    },
+    {
+      "year": 2014,
+      "month": 9,
+      "account_category": "NonEnglish",
+      "posts": 51,
+      "accounts": 2
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "account_category": "HashtagGamer",
+      "posts": 172,
+      "accounts": 3
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "account_category": "LeftTroll",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "account_category": "NonEnglish",
+      "posts": 19,
+      "accounts": 2
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "account_category": "HashtagGamer",
+      "posts": 3121,
+      "accounts": 14
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "account_category": "NonEnglish",
+      "posts": 10,
+      "accounts": 2
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "account_category": "RightTroll",
+      "posts": 146,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "account_category": "Fearmonger",
+      "posts": 127,
+      "accounts": 3
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "account_category": "HashtagGamer",
+      "posts": 3137,
+      "accounts": 22
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "account_category": "LeftTroll",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "account_category": "NewsFeed",
+      "posts": 25,
+      "accounts": 1
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "account_category": "NonEnglish",
+      "posts": 17,
+      "accounts": 2
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "account_category": "RightTroll",
+      "posts": 638,
+      "accounts": 12
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "account_category": "Unknown",
+      "posts": 69,
+      "accounts": 1
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "account_category": "Fearmonger",
+      "posts": 119,
+      "accounts": 1
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "account_category": "HashtagGamer",
+      "posts": 4383,
+      "accounts": 27
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "account_category": "LeftTroll",
+      "posts": 2140,
+      "accounts": 24
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "account_category": "NewsFeed",
+      "posts": 5568,
+      "accounts": 6
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "account_category": "NonEnglish",
+      "posts": 10,
+      "accounts": 1
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "account_category": "RightTroll",
+      "posts": 3481,
+      "accounts": 37
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "account_category": "Unknown",
+      "posts": 119,
+      "accounts": 1
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "account_category": "HashtagGamer",
+      "posts": 2120,
+      "accounts": 29
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "account_category": "LeftTroll",
+      "posts": 770,
+      "accounts": 25
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "account_category": "NewsFeed",
+      "posts": 6319,
+      "accounts": 6
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "account_category": "NonEnglish",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "account_category": "RightTroll",
+      "posts": 4792,
+      "accounts": 43
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "account_category": "HashtagGamer",
+      "posts": 5856,
+      "accounts": 29
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "account_category": "LeftTroll",
+      "posts": 3441,
+      "accounts": 25
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "account_category": "NewsFeed",
+      "posts": 5111,
+      "accounts": 6
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "account_category": "NonEnglish",
+      "posts": 7,
+      "accounts": 2
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "account_category": "RightTroll",
+      "posts": 3961,
+      "accounts": 43
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "account_category": "HashtagGamer",
+      "posts": 1240,
+      "accounts": 47
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "account_category": "LeftTroll",
+      "posts": 973,
+      "accounts": 28
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "account_category": "NewsFeed",
+      "posts": 4874,
+      "accounts": 7
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "account_category": "NonEnglish",
+      "posts": 3,
+      "accounts": 2
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "account_category": "RightTroll",
+      "posts": 6296,
+      "accounts": 59
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "account_category": "Fearmonger",
+      "posts": 772,
+      "accounts": 60
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "account_category": "HashtagGamer",
+      "posts": 3823,
+      "accounts": 75
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "account_category": "LeftTroll",
+      "posts": 1352,
+      "accounts": 40
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "account_category": "NewsFeed",
+      "posts": 5222,
+      "accounts": 9
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "account_category": "NonEnglish",
+      "posts": 5000,
+      "accounts": 262
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "account_category": "RightTroll",
+      "posts": 9072,
+      "accounts": 155
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "account_category": "Unknown",
+      "posts": 2123,
+      "accounts": 65
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "account_category": "Commercial",
+      "posts": 5830,
+      "accounts": 2
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "account_category": "Fearmonger",
+      "posts": 163,
+      "accounts": 32
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "account_category": "HashtagGamer",
+      "posts": 1709,
+      "accounts": 87
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "account_category": "LeftTroll",
+      "posts": 8837,
+      "accounts": 32
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "account_category": "NewsFeed",
+      "posts": 9670,
+      "accounts": 16
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "account_category": "NonEnglish",
+      "posts": 9550,
+      "accounts": 809
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "account_category": "RightTroll",
+      "posts": 32492,
+      "accounts": 153
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "account_category": "Unknown",
+      "posts": 509,
+      "accounts": 42
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "account_category": "Commercial",
+      "posts": 66961,
+      "accounts": 5
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "account_category": "Fearmonger",
+      "posts": 1212,
+      "accounts": 33
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "account_category": "HashtagGamer",
+      "posts": 2556,
+      "accounts": 89
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "account_category": "LeftTroll",
+      "posts": 2023,
+      "accounts": 50
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "account_category": "NewsFeed",
+      "posts": 14488,
+      "accounts": 14
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "account_category": "NonEnglish",
+      "posts": 31131,
+      "accounts": 896
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "account_category": "RightTroll",
+      "posts": 24794,
+      "accounts": 189
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "account_category": "Unknown",
+      "posts": 1598,
+      "accounts": 31
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "account_category": "Commercial",
+      "posts": 47569,
+      "accounts": 4
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "account_category": "Fearmonger",
+      "posts": 2139,
+      "accounts": 56
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "account_category": "HashtagGamer",
+      "posts": 1106,
+      "accounts": 91
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "account_category": "LeftTroll",
+      "posts": 2873,
+      "accounts": 73
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "account_category": "NewsFeed",
+      "posts": 12793,
+      "accounts": 15
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "account_category": "NonEnglish",
+      "posts": 45849,
+      "accounts": 924
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "account_category": "RightTroll",
+      "posts": 7023,
+      "accounts": 249
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "account_category": "Unknown",
+      "posts": 86,
+      "accounts": 16
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "account_category": "Fearmonger",
+      "posts": 610,
+      "accounts": 36
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "account_category": "HashtagGamer",
+      "posts": 1940,
+      "accounts": 98
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "account_category": "LeftTroll",
+      "posts": 1653,
+      "accounts": 56
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "account_category": "NewsFeed",
+      "posts": 12494,
+      "accounts": 14
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "account_category": "NonEnglish",
+      "posts": 46311,
+      "accounts": 972
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "account_category": "RightTroll",
+      "posts": 4479,
+      "accounts": 227
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "account_category": "Unknown",
+      "posts": 117,
+      "accounts": 18
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "account_category": "Fearmonger",
+      "posts": 47,
+      "accounts": 15
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "account_category": "HashtagGamer",
+      "posts": 2682,
+      "accounts": 88
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "account_category": "LeftTroll",
+      "posts": 2294,
+      "accounts": 56
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "account_category": "NewsFeed",
+      "posts": 13468,
+      "accounts": 20
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "account_category": "NonEnglish",
+      "posts": 56338,
+      "accounts": 913
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "account_category": "RightTroll",
+      "posts": 7997,
+      "accounts": 136
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "account_category": "Unknown",
+      "posts": 70,
+      "accounts": 11
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "account_category": "Fearmonger",
+      "posts": 5811,
+      "accounts": 120
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "account_category": "HashtagGamer",
+      "posts": 1870,
+      "accounts": 31
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "account_category": "LeftTroll",
+      "posts": 1776,
+      "accounts": 64
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "account_category": "NewsFeed",
+      "posts": 13557,
+      "accounts": 18
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "account_category": "NonEnglish",
+      "posts": 99191,
+      "accounts": 847
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "account_category": "RightTroll",
+      "posts": 9828,
+      "accounts": 236
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "account_category": "Unknown",
+      "posts": 270,
+      "accounts": 27
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "account_category": "Fearmonger",
+      "posts": 90,
+      "accounts": 10
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "account_category": "HashtagGamer",
+      "posts": 2941,
+      "accounts": 33
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "account_category": "LeftTroll",
+      "posts": 6004,
+      "accounts": 129
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "account_category": "NewsFeed",
+      "posts": 27497,
+      "accounts": 33
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "account_category": "NonEnglish",
+      "posts": 58322,
+      "accounts": 780
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "account_category": "RightTroll",
+      "posts": 21704,
+      "accounts": 257
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "account_category": "Unknown",
+      "posts": 172,
+      "accounts": 21
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "account_category": "Commercial",
+      "posts": 101,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "account_category": "Fearmonger",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "account_category": "HashtagGamer",
+      "posts": 5208,
+      "accounts": 69
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "account_category": "LeftTroll",
+      "posts": 6828,
+      "accounts": 139
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "account_category": "NewsFeed",
+      "posts": 34666,
+      "accounts": 36
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "account_category": "NonEnglish",
+      "posts": 8719,
+      "accounts": 244
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "account_category": "RightTroll",
+      "posts": 10468,
+      "accounts": 221
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "account_category": "Unknown",
+      "posts": 137,
+      "accounts": 12
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "account_category": "Commercial",
+      "posts": 1064,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "account_category": "Fearmonger",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "account_category": "HashtagGamer",
+      "posts": 4153,
+      "accounts": 73
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "account_category": "LeftTroll",
+      "posts": 12481,
+      "accounts": 138
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "account_category": "NewsFeed",
+      "posts": 37837,
+      "accounts": 39
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "account_category": "NonEnglish",
+      "posts": 13494,
+      "accounts": 255
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "account_category": "RightTroll",
+      "posts": 16524,
+      "accounts": 187
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "account_category": "Unknown",
+      "posts": 216,
+      "accounts": 7
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "account_category": "Commercial",
+      "posts": 40,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "account_category": "Fearmonger",
+      "posts": 11,
+      "accounts": 2
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "account_category": "HashtagGamer",
+      "posts": 2415,
+      "accounts": 48
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "account_category": "LeftTroll",
+      "posts": 10475,
+      "accounts": 113
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "account_category": "NewsFeed",
+      "posts": 36616,
+      "accounts": 42
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "account_category": "NonEnglish",
+      "posts": 14662,
+      "accounts": 318
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "account_category": "RightTroll",
+      "posts": 12717,
+      "accounts": 163
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "account_category": "Unknown",
+      "posts": 2255,
+      "accounts": 7
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "account_category": "Fearmonger",
+      "posts": 2,
+      "accounts": 2
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "account_category": "HashtagGamer",
+      "posts": 8050,
+      "accounts": 75
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "account_category": "LeftTroll",
+      "posts": 8031,
+      "accounts": 111
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "account_category": "NewsFeed",
+      "posts": 30165,
+      "accounts": 39
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "account_category": "NonEnglish",
+      "posts": 12734,
+      "accounts": 329
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "account_category": "RightTroll",
+      "posts": 3668,
+      "accounts": 35
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "account_category": "Unknown",
+      "posts": 2970,
+      "accounts": 7
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "account_category": "HashtagGamer",
+      "posts": 10913,
+      "accounts": 75
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "account_category": "LeftTroll",
+      "posts": 16293,
+      "accounts": 114
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "account_category": "NewsFeed",
+      "posts": 28755,
+      "accounts": 40
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "account_category": "NonEnglish",
+      "posts": 12696,
+      "accounts": 324
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "account_category": "RightTroll",
+      "posts": 7179,
+      "accounts": 97
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "account_category": "Unknown",
+      "posts": 1790,
+      "accounts": 3
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "account_category": "Fearmonger",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "account_category": "HashtagGamer",
+      "posts": 17749,
+      "accounts": 74
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "account_category": "LeftTroll",
+      "posts": 16081,
+      "accounts": 117
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "account_category": "NewsFeed",
+      "posts": 23396,
+      "accounts": 41
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "account_category": "NonEnglish",
+      "posts": 16796,
+      "accounts": 273
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "account_category": "RightTroll",
+      "posts": 4588,
+      "accounts": 66
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "account_category": "Unknown",
+      "posts": 209,
+      "accounts": 3
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "account_category": "Fearmonger",
+      "posts": 9,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "account_category": "HashtagGamer",
+      "posts": 11135,
+      "accounts": 53
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "account_category": "LeftTroll",
+      "posts": 9507,
+      "accounts": 117
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "account_category": "NewsFeed",
+      "posts": 18600,
+      "accounts": 38
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "account_category": "NonEnglish",
+      "posts": 19743,
+      "accounts": 305
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "account_category": "RightTroll",
+      "posts": 6001,
+      "accounts": 69
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "account_category": "Unknown",
+      "posts": 33,
+      "accounts": 4
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "account_category": "HashtagGamer",
+      "posts": 29974,
+      "accounts": 52
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "account_category": "LeftTroll",
+      "posts": 10564,
+      "accounts": 110
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "account_category": "NewsFeed",
+      "posts": 16838,
+      "accounts": 37
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "account_category": "NonEnglish",
+      "posts": 17713,
+      "accounts": 333
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "account_category": "RightTroll",
+      "posts": 6261,
+      "accounts": 68
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "account_category": "Unknown",
+      "posts": 11,
+      "accounts": 5
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "account_category": "Fearmonger",
+      "posts": 17,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "account_category": "HashtagGamer",
+      "posts": 19760,
+      "accounts": 49
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "account_category": "LeftTroll",
+      "posts": 6993,
+      "accounts": 111
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "account_category": "NewsFeed",
+      "posts": 25527,
+      "accounts": 39
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "account_category": "NonEnglish",
+      "posts": 13736,
+      "accounts": 277
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "account_category": "RightTroll",
+      "posts": 39053,
+      "accounts": 69
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "account_category": "Unknown",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "account_category": "Fearmonger",
+      "posts": 3,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "account_category": "HashtagGamer",
+      "posts": 14106,
+      "accounts": 48
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "account_category": "LeftTroll",
+      "posts": 47964,
+      "accounts": 108
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "account_category": "NewsFeed",
+      "posts": 21804,
+      "accounts": 35
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "account_category": "NonEnglish",
+      "posts": 35018,
+      "accounts": 207
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "account_category": "RightTroll",
+      "posts": 21600,
+      "accounts": 36
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "account_category": "Unknown",
+      "posts": 2,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "account_category": "HashtagGamer",
+      "posts": 20231,
+      "accounts": 48
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "account_category": "LeftTroll",
+      "posts": 31299,
+      "accounts": 70
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "account_category": "NewsFeed",
+      "posts": 10500,
+      "accounts": 39
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "account_category": "NonEnglish",
+      "posts": 37457,
+      "accounts": 208
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "account_category": "RightTroll",
+      "posts": 22775,
+      "accounts": 61
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "account_category": "Unknown",
+      "posts": 1,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "account_category": "Commercial",
+      "posts": 35,
+      "accounts": 1
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "account_category": "HashtagGamer",
+      "posts": 26685,
+      "accounts": 53
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "account_category": "LeftTroll",
+      "posts": 41074,
+      "accounts": 87
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "account_category": "NewsFeed",
+      "posts": 21947,
+      "accounts": 31
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "account_category": "NonEnglish",
+      "posts": 38246,
+      "accounts": 210
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "account_category": "RightTroll",
+      "posts": 27523,
+      "accounts": 62
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "account_category": "Unknown",
+      "posts": 6,
+      "accounts": 2
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "account_category": "Commercial",
+      "posts": 280,
+      "accounts": 1
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "account_category": "HashtagGamer",
+      "posts": 15663,
+      "accounts": 50
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "account_category": "LeftTroll",
+      "posts": 34810,
+      "accounts": 74
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "account_category": "NewsFeed",
+      "posts": 24256,
+      "accounts": 31
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "account_category": "NonEnglish",
+      "posts": 29898,
+      "accounts": 222
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "account_category": "RightTroll",
+      "posts": 30338,
+      "accounts": 60
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "account_category": "Unknown",
+      "posts": 6,
+      "accounts": 2
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "account_category": "Commercial",
+      "posts": 24,
+      "accounts": 1
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "account_category": "Fearmonger",
+      "posts": 4,
+      "accounts": 1
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "account_category": "HashtagGamer",
+      "posts": 8262,
+      "accounts": 35
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "account_category": "LeftTroll",
+      "posts": 28574,
+      "accounts": 64
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "account_category": "NewsFeed",
+      "posts": 20122,
+      "accounts": 31
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "account_category": "NonEnglish",
+      "posts": 16712,
+      "accounts": 207
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "account_category": "RightTroll",
+      "posts": 26840,
+      "accounts": 51
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "account_category": "HashtagGamer",
+      "posts": 3526,
+      "accounts": 25
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "account_category": "LeftTroll",
+      "posts": 32676,
+      "accounts": 72
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "account_category": "NewsFeed",
+      "posts": 23325,
+      "accounts": 31
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "account_category": "NonEnglish",
+      "posts": 42401,
+      "accounts": 277
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "account_category": "RightTroll",
+      "posts": 26402,
+      "accounts": 63
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "account_category": "Unknown",
+      "posts": 48,
+      "accounts": 12
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "account_category": "HashtagGamer",
+      "posts": 3214,
+      "accounts": 22
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "account_category": "LeftTroll",
+      "posts": 33998,
+      "accounts": 62
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "account_category": "NewsFeed",
+      "posts": 21978,
+      "accounts": 31
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "account_category": "NonEnglish",
+      "posts": 42504,
+      "accounts": 407
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "account_category": "RightTroll",
+      "posts": 29547,
+      "accounts": 48
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "account_category": "Unknown",
+      "posts": 32,
+      "accounts": 8
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "account_category": "HashtagGamer",
+      "posts": 333,
+      "accounts": 20
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "account_category": "LeftTroll",
+      "posts": 6646,
+      "accounts": 63
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "account_category": "NewsFeed",
+      "posts": 21982,
+      "accounts": 30
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "account_category": "NonEnglish",
+      "posts": 19524,
+      "accounts": 261
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "account_category": "RightTroll",
+      "posts": 11813,
+      "accounts": 58
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "account_category": "Unknown",
+      "posts": 307,
+      "accounts": 41
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "account_category": "HashtagGamer",
+      "posts": 446,
+      "accounts": 26
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "account_category": "LeftTroll",
+      "posts": 1793,
+      "accounts": 37
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "account_category": "NewsFeed",
+      "posts": 19930,
+      "accounts": 30
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "account_category": "NonEnglish",
+      "posts": 16131,
+      "accounts": 301
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "account_category": "RightTroll",
+      "posts": 13185,
+      "accounts": 23
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "account_category": "Unknown",
+      "posts": 167,
+      "accounts": 10
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "account_category": "HashtagGamer",
+      "posts": 693,
+      "accounts": 27
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "account_category": "LeftTroll",
+      "posts": 21319,
+      "accounts": 50
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "account_category": "NewsFeed",
+      "posts": 21497,
+      "accounts": 30
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "account_category": "NonEnglish",
+      "posts": 21816,
+      "accounts": 248
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "account_category": "RightTroll",
+      "posts": 17483,
+      "accounts": 130
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "account_category": "Unknown",
+      "posts": 86,
+      "accounts": 12
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "account_category": "HashtagGamer",
+      "posts": 494,
+      "accounts": 26
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "account_category": "LeftTroll",
+      "posts": 8400,
+      "accounts": 45
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "account_category": "NewsFeed",
+      "posts": 6148,
+      "accounts": 30
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "account_category": "NonEnglish",
+      "posts": 16173,
+      "accounts": 226
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "account_category": "RightTroll",
+      "posts": 157426,
+      "accounts": 128
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "account_category": "Unknown",
+      "posts": 29,
+      "accounts": 6
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "account_category": "LeftTroll",
+      "posts": 300,
+      "accounts": 5
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "account_category": "NewsFeed",
+      "posts": 710,
+      "accounts": 3
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "account_category": "NonEnglish",
+      "posts": 17168,
+      "accounts": 208
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "account_category": "RightTroll",
+      "posts": 31737,
+      "accounts": 32
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "account_category": "Unknown",
+      "posts": 37,
+      "accounts": 2
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "account_category": "LeftTroll",
+      "posts": 232,
+      "accounts": 3
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "account_category": "NewsFeed",
+      "posts": 208,
+      "accounts": 2
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "account_category": "NonEnglish",
+      "posts": 3521,
+      "accounts": 103
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "account_category": "RightTroll",
+      "posts": 24809,
+      "accounts": 33
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "account_category": "Unknown",
+      "posts": 6,
+      "accounts": 2
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "account_category": "LeftTroll",
+      "posts": 542,
+      "accounts": 3
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "account_category": "NonEnglish",
+      "posts": 78,
+      "accounts": 11
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "account_category": "RightTroll",
+      "posts": 16032,
+      "accounts": 6
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "account_category": "Unknown",
+      "posts": 32,
+      "accounts": 2
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "account_category": "LeftTroll",
+      "posts": 1235,
+      "accounts": 5
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "account_category": "NewsFeed",
+      "posts": 35,
+      "accounts": 1
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "account_category": "NonEnglish",
+      "posts": 134,
+      "accounts": 15
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "account_category": "RightTroll",
+      "posts": 8351,
+      "accounts": 6
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "account_category": "Unknown",
+      "posts": 24,
+      "accounts": 1
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "account_category": "LeftTroll",
+      "posts": 1295,
+      "accounts": 4
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "account_category": "NonEnglish",
+      "posts": 123,
+      "accounts": 9
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "account_category": "RightTroll",
+      "posts": 494,
+      "accounts": 5
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "account_category": "LeftTroll",
+      "posts": 1331,
+      "accounts": 4
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "account_category": "NonEnglish",
+      "posts": 282,
+      "accounts": 13
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "account_category": "RightTroll",
+      "posts": 424,
+      "accounts": 5
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "account_category": "LeftTroll",
+      "posts": 1204,
+      "accounts": 4
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "account_category": "NonEnglish",
+      "posts": 172,
+      "accounts": 9
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "account_category": "RightTroll",
+      "posts": 339,
+      "accounts": 5
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "account_category": "LeftTroll",
+      "posts": 567,
+      "accounts": 2
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "account_category": "NonEnglish",
+      "posts": 164,
+      "accounts": 11
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "account_category": "LeftTroll",
+      "posts": 351,
+      "accounts": 2
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "account_category": "NonEnglish",
+      "posts": 560,
+      "accounts": 9
+    }
+  ],
+  "categories": [
+    {
+      "account_category": "NonEnglish",
+      "posts": 820802
+    },
+    {
+      "account_category": "RightTroll",
+      "posts": 710280
+    },
+    {
+      "account_category": "NewsFeed",
+      "posts": 597928
+    },
+    {
+      "account_category": "LeftTroll",
+      "posts": 427141
+    },
+    {
+      "account_category": "HashtagGamer",
+      "posts": 241785
+    },
+    {
+      "account_category": "Commercial",
+      "posts": 121904
+    },
+    {
+      "account_category": "Unknown",
+      "posts": 13539
+    },
+    {
+      "account_category": "Fearmonger",
+      "posts": 11140
+    }
+  ],
+  "languages": [
+    {
+      "language": "en",
+      "posts": 2115186
+    },
+    {
+      "language": "ru",
+      "posts": 610942
+    },
+    {
+      "language": "de",
+      "posts": 86983
+    },
+    {
+      "language": "uk",
+      "posts": 38669
+    },
+    {
+      "language": "it",
+      "posts": 18062
+    },
+    {
+      "language": "sr",
+      "posts": 9480
+    },
+    {
+      "language": "uz",
+      "posts": 9334
+    },
+    {
+      "language": "bg",
+      "posts": 9236
+    },
+    {
+      "language": null,
+      "posts": 8320
+    },
+    {
+      "language": "ar",
+      "posts": 7588
+    },
+    {
+      "language": "mk",
+      "posts": 5178
+    },
+    {
+      "language": "fr",
+      "posts": 4562
+    }
+  ],
+  "countries": [
+    {
+      "country": "United States",
+      "posts": 2045021
+    },
+    {
+      "country": null,
+      "posts": 570812
+    },
+    {
+      "country": "Azerbaijan",
+      "posts": 96333
+    },
+    {
+      "country": "United Arab Emirates",
+      "posts": 74675
+    },
+    {
+      "country": "Russian Federation",
+      "posts": 37589
+    },
+    {
+      "country": "Belarus",
+      "posts": 27802
+    },
+    {
+      "country": "Germany",
+      "posts": 27178
+    },
+    {
+      "country": "United Kingdom",
+      "posts": 18048
+    },
+    {
+      "country": "Italy",
+      "posts": 13474
+    },
+    {
+      "country": "Iraq",
+      "posts": 11117
+    },
+    {
+      "country": "Ukraine",
+      "posts": 5765
+    },
+    {
+      "country": "Malaysia",
+      "posts": 4932
+    }
+  ],
+  "weekday": [
+    {
+      "weekday": "Sun",
+      "dow": 1,
+      "posts": 336661
+    },
+    {
+      "weekday": "Mon",
+      "dow": 2,
+      "posts": 469477
+    },
+    {
+      "weekday": "Tue",
+      "dow": 3,
+      "posts": 419835
+    },
+    {
+      "weekday": "Wed",
+      "dow": 4,
+      "posts": 484931
+    },
+    {
+      "weekday": "Thu",
+      "dow": 5,
+      "posts": 453086
+    },
+    {
+      "weekday": "Fri",
+      "dow": 6,
+      "posts": 427608
+    },
+    {
+      "weekday": "Sat",
+      "dow": 7,
+      "posts": 352921
+    }
+  ],
+  "top_hashtags": [
+    {
+      "hashtag": "news",
+      "posts": 131037,
+      "days_active": 853,
+      "first_seen": "2014-12-27",
+      "last_seen": "2017-12-07",
+      "peak_day": "2015-07-22",
+      "peak_posts": 688
+    },
+    {
+      "hashtag": "sports",
+      "posts": 48893,
+      "days_active": 699,
+      "first_seen": "2015-01-03",
+      "last_seen": "2017-11-19",
+      "peak_day": "2016-03-09",
+      "peak_posts": 228
+    },
+    {
+      "hashtag": "politics",
+      "posts": 39880,
+      "days_active": 737,
+      "first_seen": "2014-12-27",
+      "last_seen": "2017-12-06",
+      "peak_day": "2016-02-10",
+      "peak_posts": 227
+    },
+    {
+      "hashtag": "world",
+      "posts": 27625,
+      "days_active": 550,
+      "first_seen": "2014-10-25",
+      "last_seen": "2017-09-01",
+      "peak_day": "2015-07-22",
+      "peak_posts": 225
+    },
+    {
+      "hashtag": "local",
+      "posts": 26091,
+      "days_active": 636,
+      "first_seen": "2015-01-03",
+      "last_seen": "2017-03-23",
+      "peak_day": "2015-06-10",
+      "peak_posts": 248
+    },
+    {
+      "hashtag": "maga",
+      "posts": 16164,
+      "days_active": 515,
+      "first_seen": "2015-12-11",
+      "last_seen": "2018-05-29",
+      "peak_day": "2017-08-15",
+      "peak_posts": 592
+    },
+    {
+      "hashtag": "tcot",
+      "posts": 15654,
+      "days_active": 694,
+      "first_seen": "2015-02-18",
+      "last_seen": "2017-12-09",
+      "peak_day": "2016-02-18",
+      "peak_posts": 590
+    },
+    {
+      "hashtag": "topnews",
+      "posts": 15149,
+      "days_active": 661,
+      "first_seen": "2015-01-12",
+      "last_seen": "2016-11-02",
+      "peak_day": "2015-07-22",
+      "peak_posts": 149
+    },
+    {
+      "hashtag": "blacklivesmatter",
+      "posts": 14488,
+      "days_active": 774,
+      "first_seen": "2014-11-25",
+      "last_seen": "2018-04-20",
+      "peak_day": "2016-03-31",
+      "peak_posts": 591
+    },
+    {
+      "hashtag": "pjnet",
+      "posts": 13258,
+      "days_active": 558,
+      "first_seen": "2015-02-18",
+      "last_seen": "2017-12-09",
+      "peak_day": "2016-02-25",
+      "peak_posts": 501
+    },
+    {
+      "hashtag": "health",
+      "posts": 11591,
+      "days_active": 775,
+      "first_seen": "2015-01-11",
+      "last_seen": "2017-12-04",
+      "peak_day": "2015-07-22",
+      "peak_posts": 87
+    },
+    {
+      "hashtag": "business",
+      "posts": 10922,
+      "days_active": 583,
+      "first_seen": "2015-03-20",
+      "last_seen": "2017-08-16",
+      "peak_day": "2015-07-21",
+      "peak_posts": 159
+    },
+    {
+      "hashtag": "\u043d\u043e\u0432\u043e\u0441\u0442\u0438",
+      "posts": 10700,
+      "days_active": 584,
+      "first_seen": "2012-03-31",
+      "last_seen": "2017-09-07",
+      "peak_day": "2016-12-09",
+      "peak_posts": 163
+    },
+    {
+      "hashtag": "tech",
+      "posts": 8269,
+      "days_active": 568,
+      "first_seen": "2015-03-20",
+      "last_seen": "2017-12-03",
+      "peak_day": "2015-07-21",
+      "peak_posts": 81
+    },
+    {
+      "hashtag": "breaking",
+      "posts": 7838,
+      "days_active": 695,
+      "first_seen": "2015-01-08",
+      "last_seen": "2018-05-08",
+      "peak_day": "2016-03-08",
+      "peak_posts": 48
+    },
+    {
+      "hashtag": "entertainment",
+      "posts": 7642,
+      "days_active": 587,
+      "first_seen": "2015-01-08",
+      "last_seen": "2017-11-18",
+      "peak_day": "2015-06-05",
+      "peak_posts": 43
+    },
+    {
+      "hashtag": "top",
+      "posts": 7417,
+      "days_active": 36,
+      "first_seen": "2015-06-19",
+      "last_seen": "2017-08-21",
+      "peak_day": "2017-08-01",
+      "peak_posts": 546
+    },
+    {
+      "hashtag": "trump",
+      "posts": 7207,
+      "days_active": 743,
+      "first_seen": "2015-06-17",
+      "last_seen": "2018-03-21",
+      "peak_day": "2016-06-16",
+      "peak_posts": 205
+    },
+    {
+      "hashtag": "crime",
+      "posts": 6857,
+      "days_active": 540,
+      "first_seen": "2015-01-12",
+      "last_seen": "2017-10-18",
+      "peak_day": "2016-01-29",
+      "peak_posts": 57
+    },
+    {
+      "hashtag": "cleveland",
+      "posts": 6729,
+      "days_active": 429,
+      "first_seen": "2015-04-12",
+      "last_seen": "2017-08-08",
+      "peak_day": "2015-06-26",
+      "peak_posts": 62
+    },
+    {
+      "hashtag": "nowplaying",
+      "posts": 6713,
+      "days_active": 330,
+      "first_seen": "2015-01-26",
+      "last_seen": "2017-08-21",
+      "peak_day": "2016-10-06",
+      "peak_posts": 270
+    },
+    {
+      "hashtag": "topvideo",
+      "posts": 6547,
+      "days_active": 643,
+      "first_seen": "2015-01-12",
+      "last_seen": "2016-11-01",
+      "peak_day": "2015-06-14",
+      "peak_posts": 74
+    },
+    {
+      "hashtag": "isis",
+      "posts": 6469,
+      "days_active": 816,
+      "first_seen": "2015-01-21",
+      "last_seen": "2017-12-23",
+      "peak_day": "2016-09-19",
+      "peak_posts": 63
+    },
+    {
+      "hashtag": "merkelmussbleiben",
+      "posts": 5886,
+      "days_active": 5,
+      "first_seen": "2016-07-21",
+      "last_seen": "2016-08-26",
+      "peak_day": "2016-07-21",
+      "peak_posts": 5863
+    },
+    {
+      "hashtag": "ccot",
+      "posts": 5856,
+      "days_active": 426,
+      "first_seen": "2015-02-18",
+      "last_seen": "2017-12-04",
+      "peak_day": "2016-02-18",
+      "peak_posts": 391
+    }
+  ],
+  "top_accounts": [
+    {
+      "username": "EXQUOTE",
+      "account_category": "Commercial",
+      "posts": 45886,
+      "retweet_ratio": 0.0022,
+      "max_followers": 858,
+      "active_days": 46,
+      "first_post": "2015-07-09 08:00:00",
+      "last_post": "2015-08-31 19:23:00"
+    },
+    {
+      "username": "SCREAMYMONKEY",
+      "account_category": "NewsFeed",
+      "posts": 44001,
+      "retweet_ratio": 0.0,
+      "max_followers": 13295,
+      "active_days": 663,
+      "first_post": "2015-01-08 19:49:00",
+      "last_post": "2016-11-02 09:45:00"
+    },
+    {
+      "username": "AMELIEBALDWIN",
+      "account_category": "RightTroll",
+      "posts": 35261,
+      "retweet_ratio": 0.9616,
+      "max_followers": 2860,
+      "active_days": 328,
+      "first_post": "2015-07-13 01:19:00",
+      "last_post": "2017-08-06 12:11:00"
+    },
+    {
+      "username": "WORLDNEWSPOLI",
+      "account_category": "RightTroll",
+      "posts": 35155,
+      "retweet_ratio": 0.0,
+      "max_followers": 3855,
+      "active_days": 275,
+      "first_post": "2016-10-21 01:25:00",
+      "last_post": "2017-08-18 21:29:00"
+    },
+    {
+      "username": "TODAYPITTSBURGH",
+      "account_category": "NewsFeed",
+      "posts": 33602,
+      "retweet_ratio": 0.0007,
+      "max_followers": 20608,
+      "active_days": 813,
+      "first_post": "2015-01-08 10:18:00",
+      "last_post": "2017-04-25 22:00:00"
+    },
+    {
+      "username": "SPECIALAFFAIR",
+      "account_category": "NewsFeed",
+      "posts": 32556,
+      "retweet_ratio": 0.0,
+      "max_followers": 12023,
+      "active_days": 677,
+      "first_post": "2015-01-07 01:08:00",
+      "last_post": "2017-08-05 16:15:00"
+    },
+    {
+      "username": "SEATTLE_POST",
+      "account_category": "NewsFeed",
+      "posts": 30793,
+      "retweet_ratio": 0.0004,
+      "max_followers": 19849,
+      "active_days": 852,
+      "first_post": "2015-01-08 16:40:00",
+      "last_post": "2017-08-24 11:16:00"
+    },
+    {
+      "username": "FINDDIET",
+      "account_category": "Commercial",
+      "posts": 29034,
+      "retweet_ratio": 0.2261,
+      "max_followers": 401,
+      "active_days": 29,
+      "first_post": "2015-07-09 02:48:00",
+      "last_post": "2015-08-15 07:04:00"
+    },
+    {
+      "username": "KANSASDAILYNEWS",
+      "account_category": "NewsFeed",
+      "posts": 28806,
+      "retweet_ratio": 0.0002,
+      "max_followers": 25871,
+      "active_days": 603,
+      "first_post": "2015-12-04 12:27:00",
+      "last_post": "2017-08-29 18:23:00"
+    },
+    {
+      "username": "ROOMOFRUMOR",
+      "account_category": "NewsFeed",
+      "posts": 28351,
+      "retweet_ratio": 0.0,
+      "max_followers": 12337,
+      "active_days": 503,
+      "first_post": "2015-06-19 23:07:00",
+      "last_post": "2016-11-02 09:33:00"
+    },
+    {
+      "username": "DAILYSANFRAN",
+      "account_category": "NewsFeed",
+      "posts": 27996,
+      "retweet_ratio": 0.0005,
+      "max_followers": 20306,
+      "active_days": 579,
+      "first_post": "2015-12-09 22:38:00",
+      "last_post": "2017-08-08 23:15:00"
+    },
+    {
+      "username": "WORLDOFHASHTAGS",
+      "account_category": "HashtagGamer",
+      "posts": 23723,
+      "retweet_ratio": 0.9828,
+      "max_followers": 10893,
+      "active_days": 165,
+      "first_post": "2015-09-17 23:23:00",
+      "last_post": "2017-04-17 13:54:00"
+    },
+    {
+      "username": "COVFEFENATIONUS",
+      "account_category": "RightTroll",
+      "posts": 23544,
+      "retweet_ratio": 0.8838,
+      "max_followers": 2646,
+      "active_days": 34,
+      "first_post": "2017-11-07 06:57:00",
+      "last_post": "2017-12-10 01:12:00"
+    },
+    {
+      "username": "JENN_ABRAMS",
+      "account_category": "RightTroll",
+      "posts": 22849,
+      "retweet_ratio": 0.0736,
+      "max_followers": 71022,
+      "active_days": 880,
+      "first_post": "2015-01-17 17:05:00",
+      "last_post": "2017-08-03 17:00:00"
+    },
+    {
+      "username": "CHICAGODAILYNEW",
+      "account_category": "NewsFeed",
+      "posts": 22148,
+      "retweet_ratio": 0.0002,
+      "max_followers": 21712,
+      "active_days": 596,
+      "first_post": "2015-12-04 22:40:00",
+      "last_post": "2017-08-08 23:22:00"
+    }
+  ]
+}

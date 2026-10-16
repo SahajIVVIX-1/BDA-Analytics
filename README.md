@@ -5,8 +5,11 @@ sentiment, topics and keywords with lightweight NLP, pre-aggregates them with Mo
 serves the results through a FastAPI REST API, and shows them in a React dashboard. Performance experiments
 measure ingestion, indexing, aggregation and NLP at 100K, 500K, 1M and 2.95M documents.
 
-Everything runs on one machine with 16 GB of RAM and no GPU. There is no Spark, no cluster and no streaming:
-data is processed in batches by Python and ====MongoDB.
+The core platform runs on one machine with 16 GB of RAM and no GPU: data is processed in batches by Python and
+MongoDB. A **Big Data Lab** extension adds the distributed side: an Apache Spark pipeline that builds a
+bronze / silver / gold Parquet data lake, and a 3-shard MongoDB cluster that compares shard keys. Its results,
+architecture and course concepts (5 Vs, CAP, Hadoop mapping) are shown in tabs on the dashboard's Big Data Lab
+page; see [docs/bigdata.md](docs/bigdata.md).
 
 ![Overview page](docs/images/overview.png)
 
@@ -23,7 +26,10 @@ More screenshots (sentiment, trends, topics, anomalies, explorer, performance, d
 | API | 26 FastAPI endpoints with validation, filtering, pagination and caching | `backend/app/api/`, [docs/api.md](docs/api.md) |
 | Dashboard | React 19 + Vite + Tailwind + Recharts: 11 pages (including About dataset), global filters in the URL, loading / error / empty states, dark mode, phone layout | `frontend/` |
 | Experiments | Ingestion scaling, batch size, worker count, index timing, indexed vs collection scan with `explain()`, aggregation scaling, rollup vs live, NLP throughput | `experiments/`, [docs/performance.md](docs/performance.md) |
-| Tests | 37 backend tests (unit + MongoDB integration + API), frontend unit tests | `backend/tests/`, `frontend/src/test/` |
+| Spark data lake | PySpark 4.2 pipeline: raw CSV → bronze Parquet → silver (cleaned, de-duplicated, partitioned by year/month) → gold aggregates; scaling, codec and query-layout benchmarks | `bigdata/spark/`, [docs/bigdata.md](docs/bigdata.md) |
+| Sharded MongoDB | Config server + 3 shards + `mongos` in Docker Compose; hashed vs ranged shard key: load rate, distribution, targeted vs scatter-gather queries | `bigdata/sharding/`, `docker-compose.bigdata.yml` |
+| Big Data Lab page | Tabs for architecture flow, Spark, data lake, gold data, sharding, and course concepts (5 Vs, CAP, Hadoop map) | `frontend/src/pages/BigDataLab.jsx`, `frontend/src/pages/bigdata/` |
+| Tests | 40 backend tests (unit + MongoDB integration + API), frontend unit tests | `backend/tests/`, `frontend/src/test/` |
 
 ## The data, honestly
 
@@ -104,6 +110,19 @@ python ../experiments/run_experiments.py all
 python ../experiments/make_report.py     # regenerates docs/performance.md from the measured JSON
 ```
 
+### 6. Big Data Lab (optional)
+
+Needs Docker Desktop (it provides Java for Spark and the MongoDB cluster) and the raw CSV files in `data/raw/`.
+Measured results are already in `experiments/results/`, so the dashboard page works without running this.
+
+```powershell
+.\scripts\bigdata.ps1            # Windows: builds the Spark image, runs the lake pipeline, benchmarks and the sharding experiment
+./scripts/bigdata.sh             # macOS / Linux
+```
+
+Or step by step: `docker compose -f docker-compose.bigdata.yml --profile tools run --rm spark python -m bigdata.spark.pipeline`.
+The built lake (gold tables and results) is attached to the GitHub release `lake-v1`.
+
 ## Repository layout
 
 ```
@@ -118,8 +137,12 @@ backend/
     schemas/      Pydantic response / request models
   tests/          pytest suite
   models/         trained models (git-ignored; created by scripts/train_*.py)
+bigdata/
+  spark/          lake.py (bronze/silver/gold), pipeline.py, benchmarks.py
+  sharding/       cluster.py (initiate, shard, status), experiment.py, local_cluster.sh
+  docker/         Spark image (Python 3.13 + Java 21 + PySpark)
 frontend/         React dashboard (Vite, Tailwind v4, Recharts)
-scripts/          command-line entry points (download, ingest, train, enrich, rollups)
+scripts/          command-line entry points (download, ingest, train, enrich, rollups, bigdata, package_lake)
 experiments/      run_experiments.py, make_report.py, results/*.json (measured)
 docs/             architecture, database, analytics, methodology, performance, api, dataset, report material
 data/             raw/ processed/ sample/ (contents git-ignored)
@@ -134,12 +157,14 @@ data/             raw/ processed/ sample/ (contents git-ignored)
 * [Performance experiments (generated from measured results)](docs/performance.md)
 * [API reference](docs/api.md)
 * [Dataset](docs/dataset.md)
+* [Big Data Lab: Spark, data lake, sharding, 5 Vs, CAP](docs/bigdata.md)
 * University material: [report](docs/report.md), [presentation](docs/presentation.md), [viva questions](docs/viva.md)
 
 ## What this project does not do
 
-* No distributed processing: one `mongod` process, no sharding or replica set. Scaling beyond one machine is
-  discussed in the report as future work, not implemented.
+* No multi-server deployment: the dashboard uses one `mongod`. Spark runs in local mode and the sharded cluster's
+  shards share one machine with one member per replica set, so the Big Data Lab shows distribution and routing,
+  not fault tolerance or the throughput of separate servers.
 * No real-time streaming: data arrives through batch ingestion jobs (CLI or upload in the dashboard).
 * No 5M-document experiment: the real dataset has 2.95M posts and it was not padded with synthetic posts.
 * No transformer models: sentiment and topics use scikit-learn so everything runs on a CPU.

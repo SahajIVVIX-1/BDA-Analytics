@@ -10,7 +10,7 @@ filterwarnings = ["ignore::DeprecationWarning:starlette.*", "ignore:Using `httpx
 [tool.ruff]
 line-length = 140
 target-version = "py311"
-extend-include = ["../scripts/*.py", "../experiments/*.py"]
+extend-include = ["../scripts/*.py", "../experiments/*.py", "../bigdata/**/*.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM"]
@@ -21,3 +21,4 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "../experiments/*.py" = ["B023"]  # timing lambdas are called immediately inside the loop
+"../bigdata/**/*.py" = ["B023"]  # same: query lambdas run inside the loop that defines them

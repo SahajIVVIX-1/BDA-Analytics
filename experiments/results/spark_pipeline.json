@@ -1,0 +1,458 @@
+{
+  "experiment": "spark_pipeline",
+  "run_at": "2026-10-16T11:44:57.788157+00:00",
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "spark": "4.2.0",
+    "java": "21.0.12.1",
+    "label": "Cloud VM (Linux, 4 vCPU, 15 GiB RAM)"
+  },
+  "params": {
+    "raw_dir": "data/raw/ira538",
+    "master": "local[*]",
+    "default_parallelism": 4,
+    "shuffle_partitions": 16,
+    "lake_dir": "data/lake"
+  },
+  "timings": {
+    "bronze_sec": 37.73,
+    "validate_sec": 3.738,
+    "silver_sec": 92.225,
+    "gold_sec": 12.415,
+    "total_sec": 147.257
+  },
+  "rows": {
+    "raw": 2945912,
+    "valid": 2945911,
+    "invalid": {
+      "empty_text": 1
+    },
+    "duplicates_removed": 1392,
+    "silver": 2944519
+  },
+  "throughput_rows_per_sec": 20005.2,
+  "layers": {
+    "raw_csv": {
+      "bytes": 1140564435,
+      "files": 13,
+      "rows": 2945912
+    },
+    "bronze": {
+      "bytes": 546295858,
+      "files": 8,
+      "rows": 2945912
+    },
+    "silver": {
+      "bytes": 497849411,
+      "files": 74,
+      "rows": 2944519,
+      "partitions": 74
+    },
+    "gold": {
+      "bytes": 5806872,
+      "files": 9,
+      "tables": {
+        "daily_activity": {
+          "bytes": 382228,
+          "rows": 52630
+        },
+        "hashtag_daily": {
+          "bytes": 3295086,
+          "rows": 417733
+        },
+        "top_hashtags": {
+          "bytes": 1980116,
+          "rows": 105227
+        },
+        "account_stats": {
+          "bytes": 145000,
+          "rows": 2883
+        },
+        "monthly_category": {
+          "bytes": 4442,
+          "rows": 309
+        }
+      }
+    }
+  },
+  "silver_partitions": [
+    {
+      "year": "2012",
+      "month": "10",
+      "bytes": 13409
+    },
+    {
+      "year": "2012",
+      "month": "11",
+      "bytes": 11597
+    },
+    {
+      "year": "2012",
+      "month": "12",
+      "bytes": 12697
+    },
+    {
+      "year": "2012",
+      "month": "2",
+      "bytes": 16244
+    },
+    {
+      "year": "2012",
+      "month": "3",
+      "bytes": 14193
+    },
+    {
+      "year": "2012",
+      "month": "4",
+      "bytes": 11737
+    },
+    {
+      "year": "2012",
+      "month": "5",
+      "bytes": 12700
+    },
+    {
+      "year": "2012",
+      "month": "6",
+      "bytes": 12402
+    },
+    {
+      "year": "2012",
+      "month": "7",
+      "bytes": 21664
+    },
+    {
+      "year": "2012",
+      "month": "8",
+      "bytes": 27875
+    },
+    {
+      "year": "2012",
+      "month": "9",
+      "bytes": 11589
+    },
+    {
+      "year": "2013",
+      "month": "1",
+      "bytes": 12396
+    },
+    {
+      "year": "2013",
+      "month": "10",
+      "bytes": 6789
+    },
+    {
+      "year": "2013",
+      "month": "12",
+      "bytes": 6982
+    },
+    {
+      "year": "2013",
+      "month": "2",
+      "bytes": 9297
+    },
+    {
+      "year": "2013",
+      "month": "3",
+      "bytes": 13329
+    },
+    {
+      "year": "2013",
+      "month": "4",
+      "bytes": 11314
+    },
+    {
+      "year": "2013",
+      "month": "5",
+      "bytes": 11428
+    },
+    {
+      "year": "2013",
+      "month": "6",
+      "bytes": 11730
+    },
+    {
+      "year": "2013",
+      "month": "7",
+      "bytes": 12350
+    },
+    {
+      "year": "2013",
+      "month": "8",
+      "bytes": 6172
+    },
+    {
+      "year": "2014",
+      "month": "1",
+      "bytes": 6824
+    },
+    {
+      "year": "2014",
+      "month": "10",
+      "bytes": 33702
+    },
+    {
+      "year": "2014",
+      "month": "11",
+      "bytes": 302085
+    },
+    {
+      "year": "2014",
+      "month": "12",
+      "bytes": 450671
+    },
+    {
+      "year": "2014",
+      "month": "2",
+      "bytes": 6117
+    },
+    {
+      "year": "2014",
+      "month": "3",
+      "bytes": 5800
+    },
+    {
+      "year": "2014",
+      "month": "4",
+      "bytes": 6430
+    },
+    {
+      "year": "2014",
+      "month": "5",
+      "bytes": 6461
+    },
+    {
+      "year": "2014",
+      "month": "6",
+      "bytes": 14391
+    },
+    {
+      "year": "2014",
+      "month": "7",
+      "bytes": 18382
+    },
+    {
+      "year": "2014",
+      "month": "8",
+      "bytes": 21544
+    },
+    {
+      "year": "2014",
+      "month": "9",
+      "bytes": 15592
+    },
+    {
+      "year": "2015",
+      "month": "1",
+      "bytes": 1745436
+    },
+    {
+      "year": "2015",
+      "month": "10",
+      "bytes": 14343343
+    },
+    {
+      "year": "2015",
+      "month": "11",
+      "bytes": 22252912
+    },
+    {
+      "year": "2015",
+      "month": "12",
+      "bytes": 20557213
+    },
+    {
+      "year": "2015",
+      "month": "2",
+      "bytes": 1595516
+    },
+    {
+      "year": "2015",
+      "month": "3",
+      "bytes": 2005777
+    },
+    {
+      "year": "2015",
+      "month": "4",
+      "bytes": 1613605
+    },
+    {
+      "year": "2015",
+      "month": "5",
+      "bytes": 3847798
+    },
+    {
+      "year": "2015",
+      "month": "6",
+      "bytes": 11133559
+    },
+    {
+      "year": "2015",
+      "month": "7",
+      "bytes": 28453258
+    },
+    {
+      "year": "2015",
+      "month": "8",
+      "bytes": 23765014
+    },
+    {
+      "year": "2015",
+      "month": "9",
+      "bytes": 11478961
+    },
+    {
+      "year": "2016",
+      "month": "1",
+      "bytes": 10299874
+    },
+    {
+      "year": "2016",
+      "month": "10",
+      "bytes": 24805970
+    },
+    {
+      "year": "2016",
+      "month": "11",
+      "bytes": 21907527
+    },
+    {
+      "year": "2016",
+      "month": "12",
+      "bytes": 27137216
+    },
+    {
+      "year": "2016",
+      "month": "2",
+      "bytes": 13750975
+    },
+    {
+      "year": "2016",
+      "month": "3",
+      "bytes": 12418332
+    },
+    {
+      "year": "2016",
+      "month": "4",
+      "bytes": 9924208
+    },
+    {
+      "year": "2016",
+      "month": "5",
+      "bytes": 11941344
+    },
+    {
+      "year": "2016",
+      "month": "6",
+      "bytes": 12045777
+    },
+    {
+      "year": "2016",
+      "month": "7",
+      "bytes": 9813940
+    },
+    {
+      "year": "2016",
+      "month": "8",
+      "bytes": 11830791
+    },
+    {
+      "year": "2016",
+      "month": "9",
+      "bytes": 17290772
+    },
+    {
+      "year": "2017",
+      "month": "1",
+      "bytes": 23844032
+    },
+    {
+      "year": "2017",
+      "month": "10",
+      "bytes": 2653456
+    },
+    {
+      "year": "2017",
+      "month": "11",
+      "bytes": 3048222
+    },
+    {
+      "year": "2017",
+      "month": "12",
+      "bytes": 2081930
+    },
+    {
+      "year": "2017",
+      "month": "2",
+      "bytes": 17698149
+    },
+    {
+      "year": "2017",
+      "month": "3",
+      "bytes": 23737761
+    },
+    {
+      "year": "2017",
+      "month": "4",
+      "bytes": 24022120
+    },
+    {
+      "year": "2017",
+      "month": "5",
+      "bytes": 10873736
+    },
+    {
+      "year": "2017",
+      "month": "6",
+      "bytes": 8803999
+    },
+    {
+      "year": "2017",
+      "month": "7",
+      "bytes": 14941673
+    },
+    {
+      "year": "2017",
+      "month": "8",
+      "bytes": 30877957
+    },
+    {
+      "year": "2017",
+      "month": "9",
+      "bytes": 6434680
+    },
+    {
+      "year": "2018",
+      "month": "1",
+      "bytes": 443594
+    },
+    {
+      "year": "2018",
+      "month": "2",
+      "bytes": 493750
+    },
+    {
+      "year": "2018",
+      "month": "3",
+      "bytes": 398252
+    },
+    {
+      "year": "2018",
+      "month": "4",
+      "bytes": 170481
+    },
+    {
+      "year": "2018",
+      "month": "5",
+      "bytes": 210608
+    }
+  ],
+  "plans": {
+    "partition_pruning": "AdaptiveSparkPlan isFinalPlan=false\n+- HashAggregate(keys=[account_category#391], functions=[count(1)], output=[account_category#391, count#3296L])\n   +- Exchange hashpartitioning(account_category#391, 16), ENSURE_REQUIREMENTS, [plan_id=1205]\n      +- HashAggregate(keys=[account_category#391], functions=[partial_count(1)], output=[account_category#391, count#3320L])\n         +- Project [account_category#391]\n            +- FileScan parquet [account_category#391,year#407,month#408] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/home/user/work/repo/data/lake/silver/posts], PartitionFilters: [isnotnull(year#407), isnotnull(month#408), (year#407 = 2016), (month#408 = 10)], PushedFilters: [], ReadSchema: struct<account_category:string>\n"
+  }
+}

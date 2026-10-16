@@ -1,0 +1,252 @@
+{
+  "experiment": "sharding",
+  "run_at": "2026-10-16T12:05:52.458120+00:00",
+  "hardware": {
+    "os": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "ram_gb": 15.7,
+    "spark": "4.2.0",
+    "java": "21.0.12.1",
+    "label": "Cloud VM (Linux, 4 vCPU, 15 GiB RAM)",
+    "mongodb": "8.0.23"
+  },
+  "params": {
+    "docs": 1000898,
+    "shards": [
+      "shard1rs",
+      "shard2rs",
+      "shard3rs"
+    ],
+    "ranged_split_points": [
+      "2016-02-29 14:14:00",
+      "2017-01-03 00:34:00"
+    ],
+    "query_week": [
+      "2016-08-01 00:00:00",
+      "2016-08-08 00:00:00"
+    ],
+    "runs_per_query": 5,
+    "statistic": "median"
+  },
+  "topology": {
+    "config_servers": 1,
+    "shards": 3,
+    "routers": 1,
+    "replica_set_members_per_shard": 1
+  },
+  "strategies": [
+    {
+      "name": "single",
+      "shard_key": null,
+      "load_sec": 15.477,
+      "docs_per_sec": 64670.0,
+      "distribution": [
+        {
+          "shard": "standalone",
+          "docs": 1000898,
+          "chunks": null
+        }
+      ],
+      "queries": [
+        {
+          "query": "point_lookup",
+          "description": "Find one post by post_id",
+          "results": 1,
+          "median_ms": 0.6,
+          "shards_targeted": [],
+          "n_shards": 1,
+          "stage": "standalone"
+        },
+        {
+          "query": "one_week",
+          "description": "Posts in one week (date range)",
+          "results": 5433,
+          "median_ms": 25.8,
+          "shards_targeted": [],
+          "n_shards": 1,
+          "stage": "standalone"
+        },
+        {
+          "query": "category_totals",
+          "description": "Posts per account category (whole collection)",
+          "results": 8,
+          "median_ms": 5207.59,
+          "shards_targeted": [],
+          "n_shards": 1,
+          "stage": "standalone"
+        },
+        {
+          "query": "week_by_language",
+          "description": "Posts per language in one week",
+          "results": 27,
+          "median_ms": 41.94,
+          "shards_targeted": [],
+          "n_shards": 1,
+          "stage": "standalone"
+        }
+      ]
+    },
+    {
+      "name": "hashed",
+      "shard_key": {
+        "post_id": "hashed"
+      },
+      "load_sec": 19.564,
+      "docs_per_sec": 51160.2,
+      "distribution": [
+        {
+          "shard": "shard1rs",
+          "docs": 333571,
+          "bytes": 124998292,
+          "chunks": 1
+        },
+        {
+          "shard": "shard2rs",
+          "docs": 334098,
+          "bytes": 125147756,
+          "chunks": 1
+        },
+        {
+          "shard": "shard3rs",
+          "docs": 333229,
+          "bytes": 124812220,
+          "chunks": 1
+        }
+      ],
+      "queries": [
+        {
+          "query": "point_lookup",
+          "description": "Find one post by post_id",
+          "results": 1,
+          "median_ms": 0.89,
+          "shards_targeted": [
+            "shard2rs"
+          ],
+          "n_shards": 1,
+          "stage": "SINGLE_SHARD"
+        },
+        {
+          "query": "one_week",
+          "description": "Posts in one week (date range)",
+          "results": 5433,
+          "median_ms": 22.67,
+          "shards_targeted": [
+            "shard2rs",
+            "shard3rs",
+            "shard1rs"
+          ],
+          "n_shards": 3,
+          "stage": "SHARD_MERGE"
+        },
+        {
+          "query": "category_totals",
+          "description": "Posts per account category (whole collection)",
+          "results": 8,
+          "median_ms": 2318.36,
+          "shards_targeted": [
+            "shard1rs",
+            "shard3rs",
+            "shard2rs"
+          ],
+          "n_shards": 3,
+          "stage": "SHARD_MERGE"
+        },
+        {
+          "query": "week_by_language",
+          "description": "Posts per language in one week",
+          "results": 27,
+          "median_ms": 26.14,
+          "shards_targeted": [
+            "shard3rs",
+            "shard1rs",
+            "shard2rs"
+          ],
+          "n_shards": 3,
+          "stage": "SHARD_MERGE"
+        }
+      ]
+    },
+    {
+      "name": "ranged",
+      "shard_key": {
+        "created_at": 1
+      },
+      "load_sec": 15.17,
+      "docs_per_sec": 65978.8,
+      "distribution": [
+        {
+          "shard": "shard1rs",
+          "docs": 333109,
+          "bytes": 127316905,
+          "chunks": 1
+        },
+        {
+          "shard": "shard2rs",
+          "docs": 333760,
+          "bytes": 125108654,
+          "chunks": 1
+        },
+        {
+          "shard": "shard3rs",
+          "docs": 334029,
+          "bytes": 122532709,
+          "chunks": 1
+        }
+      ],
+      "queries": [
+        {
+          "query": "point_lookup",
+          "description": "Find one post by post_id",
+          "results": 1,
+          "median_ms": 1.36,
+          "shards_targeted": [
+            "shard1rs",
+            "shard3rs",
+            "shard2rs"
+          ],
+          "n_shards": 3,
+          "stage": "SHARD_MERGE"
+        },
+        {
+          "query": "one_week",
+          "description": "Posts in one week (date range)",
+          "results": 5433,
+          "median_ms": 36.08,
+          "shards_targeted": [
+            "shard2rs"
+          ],
+          "n_shards": 1,
+          "stage": "SINGLE_SHARD"
+        },
+        {
+          "query": "category_totals",
+          "description": "Posts per account category (whole collection)",
+          "results": 8,
+          "median_ms": 2121.36,
+          "shards_targeted": [
+            "shard3rs",
+            "shard2rs",
+            "shard1rs"
+          ],
+          "n_shards": 3,
+          "stage": "SHARD_MERGE"
+        },
+        {
+          "query": "week_by_language",
+          "description": "Posts per language in one week",
+          "results": 27,
+          "median_ms": 53.06,
+          "shards_targeted": [
+            "shard2rs"
+          ],
+          "n_shards": 1,
+          "stage": "SINGLE_SHARD"
+        }
+      ]
+    }
+  ],
+  "note": "All shards share one machine, so timings show routing overhead and data layout, not the throughput separate servers would add."
+}

@@ -1,0 +1,87 @@
+# Big Data Lab: Spark + a MongoDB sharded cluster, all in containers.
+#
+#   docker compose -f docker-compose.bigdata.yml up -d            # start the cluster (6 containers)
+#   docker compose -f docker-compose.bigdata.yml run --rm spark python -m bigdata.sharding.cluster init
+#   docker compose -f docker-compose.bigdata.yml run --rm spark python -m bigdata.spark.pipeline
+#   docker compose -f docker-compose.bigdata.yml down             # stop (add -v to delete cluster data)
+#
+# Or run everything at once: scripts/bigdata.ps1 (Windows) / scripts/bigdata.sh (macOS / Linux).
+#
+# Memory: every mongod gets a 0.25 GB WiredTiger cache by default (set WT_CACHE_GB to change it) and Spark's
+# driver 2 GB (SPARK_DRIVER_MEMORY), so the whole lab fits in Docker Desktop's default ~4 GB on an 8 GB laptop.
+#
+# Topology: 1 config-server replica set, 3 shard replica sets (one member each), 1 mongos router,
+# plus a standalone mongod used as the unsharded baseline. Ports are bound to 127.0.0.1 only:
+#   mongos 27030 · standalone 27031 · config 27040 · shards 27041-27043
+name: bda-bigdata
+
+x-mongo: &mongo
+  image: mongo:8.0
+  restart: unless-stopped
+
+services:
+  cfg:
+    <<: *mongo
+    command: ["mongod", "--configsvr", "--replSet", "cfgrs", "--port", "27019", "--bind_ip_all",
+              "--dbpath", "/data/db", "--wiredTigerCacheSizeGB", "${WT_CACHE_GB:-0.25}"]
+    ports: ["127.0.0.1:27040:27019"]
+    volumes: [cfg-data:/data/db]
+
+  shard1:
+    <<: *mongo
+    command: ["mongod", "--shardsvr", "--replSet", "shard1rs", "--port", "27018", "--bind_ip_all",
+              "--wiredTigerCacheSizeGB", "${WT_CACHE_GB:-0.25}"]
+    ports: ["127.0.0.1:27041:27018"]
+    volumes: [shard1-data:/data/db]
+
+  shard2:
+    <<: *mongo
+    command: ["mongod", "--shardsvr", "--replSet", "shard2rs", "--port", "27018", "--bind_ip_all",
+              "--wiredTigerCacheSizeGB", "${WT_CACHE_GB:-0.25}"]
+    ports: ["127.0.0.1:27042:27018"]
+    volumes: [shard2-data:/data/db]
+
+  shard3:
+    <<: *mongo
+    command: ["mongod", "--shardsvr", "--replSet", "shard3rs", "--port", "27018", "--bind_ip_all",
+              "--wiredTigerCacheSizeGB", "${WT_CACHE_GB:-0.25}"]
+    ports: ["127.0.0.1:27043:27018"]
+    volumes: [shard3-data:/data/db]
+
+  mongos:
+    <<: *mongo
+    command: ["mongos", "--configdb", "cfgrs/cfg:27019", "--port", "27017", "--bind_ip_all"]
+    ports: ["127.0.0.1:27030:27017"]
+    depends_on: [cfg, shard1, shard2, shard3]
+
+  single:
+    <<: *mongo
+    command: ["mongod", "--port", "27017", "--bind_ip_all", "--wiredTigerCacheSizeGB", "${WT_CACHE_GB:-0.25}"]
+    ports: ["127.0.0.1:27031:27017"]
+    volumes: [single-data:/data/db]
+
+  spark:
+    build:
+      context: .
+      dockerfile: bigdata/docker/spark.Dockerfile
+    image: bda-spark:4.2.0
+    profiles: ["tools"]          # only started by `docker compose run spark ...`
+    working_dir: /workspace
+    volumes: [".:/workspace"]
+    environment:
+      MONGOS_URI: mongodb://mongos:27017
+      SINGLE_URI: mongodb://single:27017
+      CFG_HOST: cfg:27019
+      SHARD1_HOST: shard1:27018
+      SHARD2_HOST: shard2:27018
+      SHARD3_HOST: shard3:27018
+      BENCH_MACHINE_LABEL: ${BENCH_MACHINE_LABEL:-Docker on this PC}
+      SPARK_DRIVER_MEMORY: ${SPARK_DRIVER_MEMORY:-2g}
+    depends_on: [mongos, single]
+
+volumes:
+  cfg-data:
+  shard1-data:
+  shard2-data:
+  shard3-data:
+  single-data:

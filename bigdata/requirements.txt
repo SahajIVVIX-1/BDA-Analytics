@@ -1,0 +1,3 @@
+# Spark jobs and Big Data experiments (Java 17 or 21 must be installed when running outside Docker)
+pyspark==4.2.0
+pymongo==4.18.2

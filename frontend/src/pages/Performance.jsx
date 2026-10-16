@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { Async, Card, EmptyState, Note, PageHeader, Segmented, Table } from '../components/ui'
+import { Brain, Layers, Search, Upload } from 'lucide-react'
+import { Async, Card, EmptyState, Note, PageHeader, Segmented, TabPanel, Table, Tabs, useTab } from '../components/ui'
 import { ChartTooltip, Legend, axisProps, colorMap, gridProps } from '../charts/common'
 import { useApi } from '../hooks/useApi'
 import { fmtBytes, fmtCompact, fmtDateTime, fmtInt, fmtMs } from '../utils/format'
@@ -225,77 +226,101 @@ function Explain() {
   )
 }
 
+const TABS = [
+  { id: 'ingestion', label: 'Ingestion', icon: Upload },
+  { id: 'queries', label: 'Queries & indexes', icon: Search },
+  { id: 'aggregations', label: 'Aggregations', icon: Layers },
+  { id: 'nlp', label: 'NLP', icon: Brain },
+]
+
 export default function Performance() {
+  const [tab, setTab] = useTab(TABS.map((t) => t.id))
   const perf = useApi('/api/performance')
-  const idx = useApi('/api/performance/indexes')
-  const colls = useApi('/api/performance/collections')
+  const idx = useApi('/api/performance/indexes', {}, { enabled: tab === 'queries' })
+  const colls = useApi('/api/performance/collections', {}, { enabled: tab === 'aggregations' })
   const res = perf.data?.results || {}
 
   return (
     <>
-      <PageHeader title="Performance experiments" description="Measured results from experiments/run_experiments.py. Nothing on this page is estimated; experiments that have not run yet are marked.">
-      </PageHeader>
-      <Async state={perf} height={200}>
-        {() => (
-          <div className="space-y-4">
-            <Card title="1 · Ingestion scaling" subtitle="CSV → clean → bulk insert into MongoDB at increasing dataset sizes"><IngestionScaling r={res.ingestion_scaling} /><Hardware hw={res.ingestion_scaling?.hardware} runAt={res.ingestion_scaling?.run_at} /></Card>
-            <div className="grid gap-4 xl:grid-cols-3">
-              <Card title="2 · Batch size" subtitle={res.ingestion_batch_size && `${fmtInt(res.ingestion_batch_size.params.records)} records`}>
-                <SimpleBar r={res.ingestion_batch_size} x="batch_size" y="records_per_sec" xLabel="documents per insert_many" name="batch" />
-                <Hardware hw={res.ingestion_batch_size?.hardware} runAt={res.ingestion_batch_size?.run_at} />
-              </Card>
-              <Card title="3 · Parallel cleaning" subtitle={res.ingestion_workers && `${fmtInt(res.ingestion_workers.params.records)} records`}>
-                <SimpleBar r={res.ingestion_workers} x="workers" y="records_per_sec" xLabel="cleaning processes" name="workers" />
-                <Hardware hw={res.ingestion_workers?.hardware} runAt={res.ingestion_workers?.run_at} />
-              </Card>
-              <Card title="4 · When to build indexes" subtitle={res.ingestion_index_mode && `${fmtInt(res.ingestion_index_mode.params.records)} records`}>
-                {res.ingestion_index_mode ? (
-                  <Table dense rowKey={(x) => x.index_mode} rows={res.ingestion_index_mode.results} columns={[
-                    { key: 'index_mode', label: 'Strategy', render: (x) => (x.index_mode === 'upfront' ? 'All indexes during load' : 'Load, then build') },
-                    { key: 'elapsed_sec', label: 'Load', align: 'right', render: (x) => <span className="whitespace-nowrap">{x.elapsed_sec.toFixed(1)} s</span> },
-                    { key: 'index_build_sec', label: 'Build', align: 'right', render: (x) => <span className="whitespace-nowrap">{x.index_build_sec.toFixed(1)} s</span> },
-                    { key: 'total', label: 'Total', align: 'right', render: (x) => <span className="whitespace-nowrap font-medium text-ink">{x.total_sec_including_indexes.toFixed(1)} s</span> },
-                  ]} />
-                ) : <Missing name="indexmode" />}
-                <div className="mt-3"><Hardware hw={res.ingestion_index_mode?.hardware} runAt={res.ingestion_index_mode?.run_at} /></div>
-              </Card>
+      <PageHeader title="Performance experiments" description="Measured results from experiments/run_experiments.py. Nothing on this page is estimated; experiments that have not run yet are marked. Spark, data-lake and sharding experiments are on the Big Data Lab page." />
+      <Tabs tabs={TABS} value={tab} onChange={setTab} label="Experiment groups" />
+      <TabPanel id={tab}>
+        <Async state={perf} height={200}>
+          {() => (
+            <div className="space-y-4">
+              {tab === 'ingestion' && (
+                <>
+                  <Card title="1 · Ingestion scaling" subtitle="CSV → clean → bulk insert into MongoDB at increasing dataset sizes"><IngestionScaling r={res.ingestion_scaling} /><Hardware hw={res.ingestion_scaling?.hardware} runAt={res.ingestion_scaling?.run_at} /></Card>
+                  <div className="grid gap-4 xl:grid-cols-3">
+                    <Card title="2 · Batch size" subtitle={res.ingestion_batch_size && `${fmtInt(res.ingestion_batch_size.params.records)} records`}>
+                      <SimpleBar r={res.ingestion_batch_size} x="batch_size" y="records_per_sec" xLabel="documents per insert_many" name="batch" />
+                      <Hardware hw={res.ingestion_batch_size?.hardware} runAt={res.ingestion_batch_size?.run_at} />
+                    </Card>
+                    <Card title="3 · Parallel cleaning" subtitle={res.ingestion_workers && `${fmtInt(res.ingestion_workers.params.records)} records`}>
+                      <SimpleBar r={res.ingestion_workers} x="workers" y="records_per_sec" xLabel="cleaning processes" name="workers" />
+                      <Hardware hw={res.ingestion_workers?.hardware} runAt={res.ingestion_workers?.run_at} />
+                    </Card>
+                    <Card title="4 · When to build indexes" subtitle={res.ingestion_index_mode && `${fmtInt(res.ingestion_index_mode.params.records)} records`}>
+                      {res.ingestion_index_mode ? (
+                        <Table dense rowKey={(x) => x.index_mode} rows={res.ingestion_index_mode.results} columns={[
+                          { key: 'index_mode', label: 'Strategy', render: (x) => (x.index_mode === 'upfront' ? 'All indexes during load' : 'Load, then build') },
+                          { key: 'elapsed_sec', label: 'Load', align: 'right', render: (x) => <span className="whitespace-nowrap">{x.elapsed_sec.toFixed(1)} s</span> },
+                          { key: 'index_build_sec', label: 'Build', align: 'right', render: (x) => <span className="whitespace-nowrap">{x.index_build_sec.toFixed(1)} s</span> },
+                          { key: 'total', label: 'Total', align: 'right', render: (x) => <span className="whitespace-nowrap font-medium text-ink">{x.total_sec_including_indexes.toFixed(1)} s</span> },
+                        ]} />
+                      ) : <Missing name="indexmode" />}
+                      <div className="mt-3"><Hardware hw={res.ingestion_index_mode?.hardware} runAt={res.ingestion_index_mode?.run_at} /></div>
+                    </Card>
+                  </div>
+                </>
+              )}
+              {tab === 'queries' && (
+                <>
+                  <Card title="5 · Indexed query vs collection scan" subtitle="explain('executionStats'); collection scan forced with hint {$natural: 1}"><IndexExperiment r={res.index_vs_collscan} /><Hardware hw={res.index_vs_collscan?.hardware} runAt={res.index_vs_collscan?.run_at} /></Card>
+                  <div className="grid gap-4 xl:grid-cols-2">
+                    <Card title="Live explain()" subtitle="Run a representative query against the database now"><Explain /></Card>
+                    <Card title="Index design" subtitle="Every index, why it exists, and its current size">
+                      <Async state={idx} height={200}>
+                        {(x) => (
+                          <div className="max-h-[420px] overflow-y-auto">
+                            <Table dense rowKey={(i) => `${i.collection}.${i.name}`} rows={x.indexes} columns={[
+                              { key: 'collection', label: 'Collection', render: (i) => <code className="text-xs">{i.collection}</code> },
+                              { key: 'keys', label: 'Keys', render: (i) => <code className="text-xs text-ink">{i.keys.map(([k, v]) => `${k}:${v}`).join(', ')}</code> },
+                              { key: 'reason', label: 'Why', render: (i) => <span className="text-xs">{i.reason}</span> },
+                              { key: 'size', label: 'Size', align: 'right', render: (i) => fmtBytes(i.size_bytes) },
+                            ]} />
+                          </div>
+                        )}
+                      </Async>
+                    </Card>
+                  </div>
+                </>
+              )}
+              {tab === 'aggregations' && (
+                <>
+                  <Card title="6 · Aggregation pipelines" subtitle="$match / $group / $unwind / $lookup / $dateTrunc at increasing sizes"><Aggregations r={res.aggregation_scaling} /><Hardware hw={res.aggregation_scaling?.hardware} runAt={res.aggregation_scaling?.run_at} /></Card>
+                  <Card title="Collections" subtitle="Live collStats">
+                    <Async state={colls} height={200}>
+                      {(x) => (
+                        <Table dense rowKey={(c) => c.collection} rows={x.collections} columns={[
+                          { key: 'collection', label: 'Collection', render: (c) => <code className="text-xs text-ink">{c.collection}</code> },
+                          { key: 'documents', label: 'Documents', align: 'right', render: (c) => fmtInt(c.documents) },
+                          { key: 'avg', label: 'Avg doc', align: 'right', render: (c) => fmtBytes(c.avg_doc_bytes) },
+                          { key: 'storage', label: 'On disk', align: 'right', render: (c) => fmtBytes(c.storage_bytes) },
+                          { key: 'idx', label: 'Indexes', align: 'right', render: (c) => `${c.indexes} · ${fmtBytes(c.index_bytes)}` },
+                        ]} />
+                      )}
+                    </Async>
+                  </Card>
+                </>
+              )}
+              {tab === 'nlp' && (
+                <Card title="7 · NLP processing" subtitle="Sentiment and topic model throughput"><Nlp r={res.nlp_throughput} ev={res.sentiment_evaluation} /><Hardware hw={res.nlp_throughput?.hardware} runAt={res.nlp_throughput?.run_at} /></Card>
+              )}
             </div>
-            <Card title="5 · Indexed query vs collection scan" subtitle="explain('executionStats'); collection scan forced with hint {$natural: 1}"><IndexExperiment r={res.index_vs_collscan} /><Hardware hw={res.index_vs_collscan?.hardware} runAt={res.index_vs_collscan?.run_at} /></Card>
-            <Card title="6 · Aggregation pipelines" subtitle="$match / $group / $unwind / $lookup / $dateTrunc at increasing sizes"><Aggregations r={res.aggregation_scaling} /><Hardware hw={res.aggregation_scaling?.hardware} runAt={res.aggregation_scaling?.run_at} /></Card>
-            <Card title="7 · NLP processing" subtitle="Sentiment and topic model throughput"><Nlp r={res.nlp_throughput} ev={res.sentiment_evaluation} /><Hardware hw={res.nlp_throughput?.hardware} runAt={res.nlp_throughput?.run_at} /></Card>
-          </div>
-        )}
-      </Async>
-
-      <div className="mt-4 grid gap-4 xl:grid-cols-2">
-        <Card title="Live explain()" subtitle="Run a representative query against the database now"><Explain /></Card>
-        <Card title="Collections" subtitle="Live collStats">
-          <Async state={colls} height={200}>
-            {(x) => (
-              <Table dense rowKey={(c) => c.collection} rows={x.collections} columns={[
-                { key: 'collection', label: 'Collection', render: (c) => <code className="text-xs text-ink">{c.collection}</code> },
-                { key: 'documents', label: 'Documents', align: 'right', render: (c) => fmtInt(c.documents) },
-                { key: 'avg', label: 'Avg doc', align: 'right', render: (c) => fmtBytes(c.avg_doc_bytes) },
-                { key: 'storage', label: 'On disk', align: 'right', render: (c) => fmtBytes(c.storage_bytes) },
-                { key: 'idx', label: 'Indexes', align: 'right', render: (c) => `${c.indexes} · ${fmtBytes(c.index_bytes)}` },
-              ]} />
-            )}
-          </Async>
-        </Card>
-      </div>
-
-      <Card className="mt-4" title="Index design" subtitle="Every index, why it exists, and its current size">
-        <Async state={idx} height={200}>
-          {(x) => (
-            <Table dense rowKey={(i) => `${i.collection}.${i.name}`} rows={x.indexes} columns={[
-              { key: 'collection', label: 'Collection', render: (i) => <code className="text-xs">{i.collection}</code> },
-              { key: 'keys', label: 'Keys', render: (i) => <code className="text-xs text-ink">{i.keys.map(([k, v]) => `${k}:${v}`).join(', ')}</code> },
-              { key: 'reason', label: 'Why', render: (i) => <span className="text-xs">{i.reason}</span> },
-              { key: 'size', label: 'Size', align: 'right', render: (i) => fmtBytes(i.size_bytes) },
-            ]} />
           )}
         </Async>
-      </Card>
+      </TabPanel>
     </>
   )
 }
