@@ -4,7 +4,7 @@ uvicorn==0.54.0
 pydantic==2.13.5
 pydantic-settings==2.15.0
 python-multipart==0.0.32
-pymongo==4.18.2
+pymongo==4.18.3
 numpy==2.5.3
 scipy==1.18.1
 scikit-learn==1.9.1
